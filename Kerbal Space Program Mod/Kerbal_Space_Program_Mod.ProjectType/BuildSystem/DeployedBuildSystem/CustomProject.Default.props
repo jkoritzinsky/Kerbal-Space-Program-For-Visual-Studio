@@ -22,6 +22,7 @@
     <Name>$(MSBuildProjectName)</Name>
     <RootNamespace>$(Name)</RootNamespace>
     <AssemblyName>$(Name)</AssemblyName>
+      <UseOSWinMdReferences>true</UseOSWinMdReferences>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
