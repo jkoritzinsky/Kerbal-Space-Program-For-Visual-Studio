@@ -4,12 +4,12 @@
     <Name>Kerbal Space Program Mod Project</Name>
     <Description>A template for creating a Kerbal Space Program Mod project.</Description>
     <Icon>Kerbal_Space_Program_Mod.ico</Icon>
-    <ProjectType>Kerbal_Space_Program_Mod</ProjectType>
-    <RequiredFrameworkVersion>4.5.2</RequiredFrameworkVersion>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>3.5</RequiredFrameworkVersion>
     <SortOrder>1</SortOrder>
     <TemplateID>{84d7a868-0490-477f-829a-d1d9e71a2607}</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>Kerbal_Space_Program_Mod</DefaultName>
+    <DefaultName>Kerbal Space Program Mod</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
   </TemplateData>
   <TemplateContent>

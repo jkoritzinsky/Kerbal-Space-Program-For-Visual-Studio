@@ -7,9 +7,9 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
 
     <TargetPlatformVersion>7.0</TargetPlatformVersion>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <TargetFrameworkMoniker>.NETFramework,Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
+    <TargetFrameworkMoniker>.NETFramework,Version=3.5</TargetFrameworkMoniker>
 
     <OutputType>exe</OutputType>
     <OutputPath>bin\$(Configuration)\</OutputPath>

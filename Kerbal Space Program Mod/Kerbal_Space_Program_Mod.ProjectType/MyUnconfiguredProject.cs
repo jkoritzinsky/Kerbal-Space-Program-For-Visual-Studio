@@ -45,7 +45,7 @@ namespace KSP4VS
         /// </remarks>
         internal const string UniqueCapability = "Kerbal_Space_Program_Mod";
 
-        internal const string Language = "Kerbal_Space_Program_Mod";
+        internal const string Language = "Kerbal Space Program Mod";
 
         [ImportingConstructor]
         public MyUnconfiguredProject(UnconfiguredProject unconfiguredProject)

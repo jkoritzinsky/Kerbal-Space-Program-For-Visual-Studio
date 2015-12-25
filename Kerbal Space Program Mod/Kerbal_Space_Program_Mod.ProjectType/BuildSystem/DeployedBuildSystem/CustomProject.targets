@@ -17,6 +17,7 @@
     <ProjectCapability Include="AssemblyReferences;COMReferences;ProjectReferences;WinRTReferences;SDKReferences" />
     <ProjectCapability Include="AllTargetOutputGroups;VisualStudioWellKnownOutputGroups" />
     <ProjectCapability Include="ProjectConfigurationsDeclaredAsItems" />
+    <ProjectCapability Include="CSharp" />
   </ItemGroup>
 
   <ItemGroup>

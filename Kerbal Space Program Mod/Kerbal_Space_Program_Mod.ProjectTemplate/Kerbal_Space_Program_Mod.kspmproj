@@ -3,8 +3,7 @@
   <PropertyGroup Label="Globals">
       <CustomProjectExtensionsPath>$(LocalAppData)\CustomProjectSystems\Kerbal_Space_Program_Mod\</CustomProjectExtensionsPath>
   </PropertyGroup>
-  
-  <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
+    <Import Project="$(CustomProjectExtensionsPath)CustomProject.Default.props" />
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Configuration">
   </PropertyGroup>
@@ -35,6 +34,7 @@
     </Compile>
   </ItemGroup>
 
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(CustomProjectExtensionsPath)CustomProjectCs.targets" />
 
   <!-- This next bit is required unless the macro used to Import your targets is defined in an MSBuild toolset. -->
