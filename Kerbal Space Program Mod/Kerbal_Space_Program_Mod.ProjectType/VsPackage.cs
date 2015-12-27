@@ -25,7 +25,7 @@ namespace KSP4VS
     /// Creating project extensions or project types does not actually require a VSPackage.
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [Description("A custom project type based on CPS")]
+    [Description("A project system for creating mods for Kerbal Space Program")]
     [Guid(VsPackage.PackageGuid)]
     public sealed class VsPackage : Package
     {
@@ -49,6 +49,6 @@ namespace KSP4VS
         /// The default namespace this project compiles with, so that manifest
         /// resource names can be calculated for embedded resources.
         /// </summary>
-        internal const string DefaultNamespace = "KSP4VS";
+        internal const string DefaultNamespace = nameof(KSP4VS);
     }
 }
