@@ -19,7 +19,7 @@
       Items referenced in here must also be referenced in the project file.
       -->
       <ProjectItem>Properties\AssemblyInfo.cs</ProjectItem>
-      <ProjectItem OpenInEditor="true" ReplaceParameters="true">Program.cs</ProjectItem>
+      <ProjectItem OpenInEditor="true" ReplaceParameters="true">Behaviour.cs</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

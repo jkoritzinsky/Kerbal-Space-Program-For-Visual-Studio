@@ -1,48 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--Copyright, Microsoft Corporation, All rights reserved.-->
 <Rule
-	Name="ConfigurationGeneral"
-	DisplayName="General"
-	PageTemplate="generic"
-	Description="General"
-	xmlns="http://schemas.microsoft.com/build/2009/properties">
-	<Rule.Categories>
-		<Category Name="General" DisplayName="General" Description="General" />
-	</Rule.Categories>
-	<Rule.DataSource>
-		<DataSource Persistence="ProjectFile" Label="Configuration" />
-	</Rule.DataSource>
-	<StringProperty Name="ApplicationIcon" DisplayName="Application Icon" />
-	<StringListProperty Name="ProjectTypeGuids" Visible="False" />
-	<StringProperty Name="ProjectGuid" Visible="False">
-		<StringProperty.DataSource>
-			<DataSource Persistence="ProjectFile" Label="Globals" HasConfigurationCondition="False" />
-		</StringProperty.DataSource>
-	</StringProperty>
-	<DynamicEnumProperty Name="TargetFrameworkMoniker" DisplayName="Target Framework Moniker" EnumProvider="TargetFrameworkMoniker" />
-	<StringProperty Name="TargetFrameworkIdentifier" Visible="False" />
-	<StringProperty Name="TargetFrameworkVersion" Visible="False" />
-	<StringProperty Name="TargetFrameworkProfile" Visible="False" />
-	<StringProperty Name="TargetPath" />
-	<StringProperty Name="DocumentationFile" DisplayName="XML doc comments file" />
-	<StringProperty Name="AssemblyName" />
-	<StringProperty Name="Name" />
-	<StringProperty Name="RootNamespace" DisplayName="Root namespace">
-		<StringProperty.DataSource>
-			<DataSource Persistence="ProjectFile" Label="Configuration" HasConfigurationCondition="false" />
-		</StringProperty.DataSource>
-	</StringProperty>
-	<StringProperty Name="OutputName" />
-	<StringProperty Name="OutputPath" />
+    Name="ConfigurationGeneral"
+    DisplayName="General"
+    PageTemplate="generic"
+    Description="General"
+    xmlns="http://schemas.microsoft.com/build/2009/properties">
+    <Rule.Categories>
+        <Category Name="General" DisplayName="General" Description="General" />
+    </Rule.Categories>
+    <Rule.DataSource>
+        <DataSource Persistence="ProjectFile" Label="Configuration" />
+    </Rule.DataSource>
+    <StringProperty Name="ApplicationIcon" DisplayName="Application Icon" />
+    <StringListProperty Name="ProjectTypeGuids" Visible="False" />
+    <StringProperty Name="ProjectGuid" Visible="False">
+        <StringProperty.DataSource>
+            <DataSource Persistence="ProjectFile" Label="Globals" HasConfigurationCondition="False" />
+        </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty Name="KSPRoot" DisplayName="KSP Root Folder">
+        <StringProperty.DataSource>
+            <DataSource Persistence="ProjectFile" Label="Globals" HasConfigurationCondition="False" />
+        </StringProperty.DataSource>
+    </StringProperty>
+    <DynamicEnumProperty Name="TargetFrameworkMoniker" DisplayName="Target Framework Moniker" EnumProvider="TargetFrameworkMoniker" />
+    <StringProperty Name="TargetFrameworkIdentifier" Visible="False" />
+    <StringProperty Name="TargetFrameworkVersion" Visible="False" />
+    <StringProperty Name="TargetFrameworkProfile" Visible="False" />
+    <StringProperty Name="TargetPath" />
+    <StringProperty Name="DocumentationFile" DisplayName="XML doc comments file" />
+    <StringProperty Name="AssemblyName" />
+    <StringProperty Name="Name" />
+    <StringProperty Name="RootNamespace" DisplayName="Root namespace">
+        <StringProperty.DataSource>
+            <DataSource Persistence="ProjectFile" Label="Configuration" HasConfigurationCondition="false" />
+        </StringProperty.DataSource>
+    </StringProperty>
+    <StringProperty Name="OutputName" />
+    <StringProperty Name="OutputPath" />
   <EnumProperty Name="OutputType">
-		<EnumValue Name="Library" DisplayName="Class Library" />
-		<EnumValue Name="exe" DisplayName="Console Application" />
-		<EnumValue Name="winexe" DisplayName="Windows Application" />
-		<EnumValue Name="AppContainerExe" DisplayName="Windows Store app" />
-		<EnumValue Name="WinMDObj" DisplayName="WinMD" />
-	</EnumProperty>
-	<StringListProperty Name="AvailablePlatforms" Separator="," />
-	<BoolProperty Name="Optimize" Description="Should compiler optimize output?" />
+        <EnumValue Name="Library" DisplayName="Class Library" />
+    </EnumProperty>
+    <StringListProperty Name="AvailablePlatforms" Separator="," />
+    <BoolProperty Name="Optimize" Description="Should compiler optimize output?" />
   <StringProperty Name="MSBuildProjectDirectory" Visible="false"/>
   <StringProperty Name="DefaultPlatform" Visible="false" />
   <StringProperty Name="PackageAction" Visible="false" Description="The MSBuild target to use when packaging a project." />
