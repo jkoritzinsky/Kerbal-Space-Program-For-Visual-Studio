@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Part Module</Name>
+    <Description>New Part Module</Description>
+    <Icon>PartModule.ico</Icon>
+    <TemplateID>4696bca7-aa92-410a-9fae-6aa3b3a7cc75</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>PartModule.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>Assembly-CSharp</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem TargetFileName="$safeitemname$.cs" ReplaceParameters="true">PartModule.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

@@ -20,7 +20,7 @@
     <AssemblyReferenceTabs>TAB_ASSEMBLY_ALL</AssemblyReferenceTabs>
 
     <Name>$(MSBuildProjectName)</Name>
-    <RootNamespace>$(Name)</RootNamespace>
+    <RootNamespace>$(Name.Replace(' ','_'))</RootNamespace>
     <AssemblyName>$(Name)</AssemblyName>
       <UseOSWinMdReferences>true</UseOSWinMdReferences>
   </PropertyGroup>
