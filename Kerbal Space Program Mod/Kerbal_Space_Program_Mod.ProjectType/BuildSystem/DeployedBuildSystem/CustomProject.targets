@@ -14,7 +14,7 @@
   <!-- Capabilities for this project.  Conditions should be based on platform|configuration only. -->
   <ItemGroup>
     <ProjectCapability Include="Kerbal_Space_Program_Mod" />
-    <ProjectCapability Include="AssemblyReferences;COMReferences;ProjectReferences;WinRTReferences;SDKReferences" />
+    <ProjectCapability Include="AssemblyReferences;ProjectReferences;SDKReferences" />
     <ProjectCapability Include="AllTargetOutputGroups;VisualStudioWellKnownOutputGroups" />
     <ProjectCapability Include="ProjectConfigurationsDeclaredAsItems" />
     <ProjectCapability Include="CSharp" />

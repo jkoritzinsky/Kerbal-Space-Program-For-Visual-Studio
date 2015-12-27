@@ -11,18 +11,16 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <TargetFrameworkMoniker>.NETFramework,Version=3.5</TargetFrameworkMoniker>
 
-    <OutputType>exe</OutputType>
+    <OutputType>Library</OutputType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
 
-    <WinRTReferenceTabs>TAB_SDK_ALL</WinRTReferenceTabs>
     <AssemblyReferenceTabs>TAB_ASSEMBLY_ALL</AssemblyReferenceTabs>
 
     <Name>$(MSBuildProjectName)</Name>
     <RootNamespace>$(Name.Replace(' ','_'))</RootNamespace>
     <AssemblyName>$(Name)</AssemblyName>
-      <UseOSWinMdReferences>true</UseOSWinMdReferences>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
