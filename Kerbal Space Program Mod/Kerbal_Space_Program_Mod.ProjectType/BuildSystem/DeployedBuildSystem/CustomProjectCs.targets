@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildThisFileDirectory)\CustomProject.targets" />  
+    <!--
+    This is commented out because it is needs to be in each individual project template for Intellisense to work.
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
+     -->
   <ItemGroup>
     <ProjectCapability Include="ReferencesFolder"/>
 

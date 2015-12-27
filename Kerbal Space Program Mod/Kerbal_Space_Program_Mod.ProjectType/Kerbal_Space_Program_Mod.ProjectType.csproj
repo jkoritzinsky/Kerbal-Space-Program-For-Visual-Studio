@@ -257,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <XamlPropertyRule Include="BuildSystem\Rules\ConfigNode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </XamlPropertyRule>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.VisualStudio.ProjectSystem.Analyzers.14.0.50721-pre\tools\Microsoft.VisualStudio.ProjectSystem.Analyzers.dll" />

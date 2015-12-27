@@ -70,6 +70,14 @@
     <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\general.browseobject.xaml">
       <Context>BrowseObject</Context>
     </PropertyPageSchema>
+      <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\ConfigNode.xaml;">
+          <Context>File;BrowseObject</Context>
+      </PropertyPageSchema>
   </ItemGroup>
-  
+
+
+    <Target Name="CopyConfigNodes" BeforeTargets="AfterBuild">
+        <Copy SourceFiles="@(ConfigNode)" DestinationFolder="$(OutputPath)" />
+    </Target>
+    
 </Project>
