@@ -26,7 +26,7 @@ namespace KSP4VS
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [Description("A project system for creating mods for Kerbal Space Program")]
-    [Guid(VsPackage.PackageGuid)]
+    [Guid(PackageGuid)]
     public sealed class VsPackage : Package
     {
         /// <summary>

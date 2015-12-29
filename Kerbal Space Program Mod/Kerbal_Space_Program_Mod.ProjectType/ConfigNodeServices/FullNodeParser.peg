@@ -1,0 +1,27 @@
+@namespace KSP4VS.ConfigNodeServices
+@classname FullNodeParser
+@start nodes
+
+
+whitespace =  "" [ \t]+ 
+_ = whitespace?
+string = "" [^\r\n]+
+bool = "True" / "False"
+number = '-'? [0-9]+ ('.' [0-9]+)?
+newline =  "\r\n" / "\n" 
+comment =  "//" string ("\r\n" / "\n")? 
+newlineOrComment = "" _ (newline / comment)+
+name =  "" [A-Za-z]+ 
+value =  bool / number / string 
+eq =  "=" 
+bro =  "{" 
+brc =  "}" 
+
+
+nameValuePair <KeyValuePair<string,string>> = _ n:name _ eq _ v:value newlineOrComment {new KeyValuePair<string, string>(n, v)}
+
+configNodeBody <IList<ConfigNodeImpl>> = _ v:(<ConfigNodeImpl>(n:nameValuePair {ConfigNodeImpl.CreateFromPair(n)} / c:configNode {c} / (newlineOrComment {new ConfigNodeImpl()})))+ _ {v}
+
+configNode <ConfigNodeImpl> = _ n:name _ newlineOrComment _ bro b:configNodeBody brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+
+nodes <IList<ConfigNodeImpl>> = n:configNode+ {n}

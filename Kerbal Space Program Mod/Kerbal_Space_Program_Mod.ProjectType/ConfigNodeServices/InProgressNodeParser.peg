@@ -1,0 +1,26 @@
+﻿@namespace KSP4VS.ConfigNodeServices
+@classname InProgressNodeParser
+@start nodes
+
+
+whitespace = #STATE{PushTokenStart(state);} "" [ \t]+ #STATE{MarkTokenEnd(state, Token.Type.Other);}
+_ = whitespace?
+string = "" [^\r\n]+
+bool = "True" / "False"
+number = '-'? [0-9]+ ('.' [0-9]+)?
+newline = #STATE{PushTokenStart(state);} "\r\n" / "\n" #STATE{MarkTokenEnd(state, Token.Type.Other);}
+comment = #STATE{PushTokenStart(state);} "//" string ("\r\n" / "\n")?  #STATE{MarkTokenEnd(state, Token.Type.Comment);}
+newlineOrComment = "" _ (newline / comment)+
+name = #STATE{PushTokenStart(state);} "" [A-Za-z]+ #STATE{MarkTokenEnd(state, Token.Type.Name);}
+value = #STATE{PushTokenStart(state);} bool / number / string #STATE{MarkTokenEnd(state, Token.Type.Value);}
+eq = #STATE{PushTokenStart(state);} "=" #STATE{MarkTokenEnd(state, Token.Type.Other);}
+bro = #STATE{PushTokenStart(state);} "{" #STATE{MarkTokenEnd(state, Token.Type.Other);}
+brc = #STATE{PushTokenStart(state);} "}" #STATE{MarkTokenEnd(state, Token.Type.Other);}
+
+nameValuePair = _ name _ (eq _ value?)? newlineOrComment
+
+configNodeBody = _ (nameValuePair / configNode/ newlineOrComment)+ _
+
+configNode = _ name _ newlineOrComment _ bro configNodeBody brc? _ newlineOrComment?
+
+nodes <List<Token>> = "" n:configNode+ {state["List"]}
