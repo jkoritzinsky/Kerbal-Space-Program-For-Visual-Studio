@@ -22,6 +22,16 @@ namespace KSP4VS.ConfigNodeServices
         internal static ClassificationTypeDefinition NameDefinition;
 
         [Export]
+        [Name("ConfigNode.keyword")]
+        [BaseDefinition("ConfigNode")]
+        internal static ClassificationTypeDefinition KeywordDefinition;
+
+        [Export]
+        [Name("ConfigNode.name.node")]
+        [BaseDefinition("ConfigNode")]
+        internal static ClassificationTypeDefinition NodeNameDefinition;
+
+        [Export]
         [Name("ConfigNode.value")]
         [BaseDefinition("ConfigNode")]
         internal static ClassificationTypeDefinition ValueDefinition;
@@ -33,12 +43,12 @@ namespace KSP4VS.ConfigNodeServices
 
         [Export]
         [Name("ConfigNode.selector")]
-        [BaseDefinition("ConfigNode")]
+        [BaseDefinition("ConfigNode.name")]
         internal static ClassificationTypeDefinition SelectorDefinition;
 
         [Export]
         [Name("ConfigNode.nameSelector")]
-        [BaseDefinition("ConfigNode.name")]
+        [BaseDefinition("ConfigNode.name.node")]
         [BaseDefinition("ConfigNode.selector")]
         internal static ClassificationTypeDefinition NameSelectorDefinition;
     }

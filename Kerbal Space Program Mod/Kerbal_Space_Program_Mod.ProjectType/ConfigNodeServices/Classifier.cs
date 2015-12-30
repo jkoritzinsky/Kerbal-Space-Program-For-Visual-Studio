@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Pegasus.Common;
@@ -13,7 +14,7 @@ using Pegasus.Common;
 namespace KSP4VS.ConfigNodeServices
 {
     /// <summary>
-    /// Classifier that classifies all text as an instance of the "Classifier" classification type.
+    /// Classifier that classifies all text as an instance of the "ConfigNode" classification type.
     /// </summary>
     internal class Classifier : IClassifier
     {
@@ -35,30 +36,8 @@ namespace KSP4VS.ConfigNodeServices
         {
             foreach (var change in e.Changes)
             {
-                var span = GetFullNodeElement(new SnapshotSpan(e.After, change.NewSpan));
-                ClassificationChanged?.Invoke(this, new ClassificationChangedEventArgs(span));
+                ClassificationChanged?.Invoke(this, new ClassificationChangedEventArgs(new SnapshotSpan(e.After, change.NewSpan)));
             }
-        }
-
-        private SnapshotSpan GetFullNodeElement(SnapshotSpan span)
-        {
-            var snapshot = span.Snapshot;
-            var startLine = span.Start.GetContainingLine();
-            var startLineNumber = startLine.LineNumber;
-            if (startLineNumber == snapshot.LineCount - 1)
-                --startLineNumber;
-            var endLineNumber = snapshot.GetLineNumberFromPosition(span.End);
-            for (var nextLineText = snapshot.GetLineFromLineNumber(startLineNumber + 1).GetText();
-                                startLineNumber > 0 && !nextLineText.Contains("{");
-                                nextLineText = snapshot.GetLineFromLineNumber(startLineNumber--).GetText())
-                ;
-            for (var lineText = snapshot.GetLineFromLineNumber(endLineNumber).GetText();
-                    endLineNumber < snapshot.LineCount - 1 && !lineText.Contains("}");
-                    lineText = snapshot.GetLineFromLineNumber(++endLineNumber).GetText())
-                ;
-            var startPoint = snapshot.GetLineFromLineNumber(startLineNumber).Start;
-            var endPoint = snapshot.GetLineFromLineNumber(endLineNumber).End;
-            return new SnapshotSpan(startPoint, endPoint);
         }
 
 #pragma warning disable 67
@@ -86,45 +65,54 @@ namespace KSP4VS.ConfigNodeServices
         /// <returns>A list of ClassificationSpans that represent spans identified to be of this classification.</returns>
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
-            var fullNodeSpan = GetFullNodeElement(span);
-            var parser = new InProgressNodeParser();
+            //Reparse the whole thing.  It's just must simpler
+            var spanToParse = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
+            var parser = new NodeParser(true);
+            IList<LexicalElement> lexicalElements;
             try
             {
-                var parseResult = parser.Parse(fullNodeSpan.GetText());
-                return GenerateSpansFromTokenList(fullNodeSpan, parseResult);
+                parser.Parse(spanToParse.GetText(), "Editor", out lexicalElements);
+                return GenerateSpansFromLexicalElements(spanToParse, span, lexicalElements);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
-                var tokenList = (List<Token>)((Cursor)ex.Data["cursor"])["List"];
-                return GenerateSpansFromTokenList(fullNodeSpan, tokenList);
+                return new List<ClassificationSpan> { new ClassificationSpan(span, classificationRegistry.GetClassificationType("ConfigNode")) };
             }
         }
 
-        private IList<ClassificationSpan> GenerateSpansFromTokenList(SnapshotSpan fullNodeSpan, List<Token> tokenList)
+        private IList<ClassificationSpan> GenerateSpansFromLexicalElements(SnapshotSpan span, SnapshotSpan target, IList<LexicalElement> lexicalElements)
         {
-            var result = new List<ClassificationSpan>();
-            foreach (var token in tokenList)
+            var classifications = new List<ClassificationSpan>();
+            foreach (var element in lexicalElements.Where(element => ElementInSpan(span, target, element)).Where(element => !element.Name.Contains("_")))
             {
-                result.Add(new ClassificationSpan(new SnapshotSpan(fullNodeSpan.Snapshot, new Span(fullNodeSpan.Start + token.Location, token.Length)), GetClassificationForToken(token.TokenType)));
+                classifications.Add(new ClassificationSpan(
+                    new SnapshotSpan(span.Snapshot, 
+                                    new Span(span.Start.Position + element.StartCursor.Location,
+                                                element.EndCursor.Location - element.StartCursor.Location)), GetClassificationForLexicalElement(element)));
             }
-            return result;
+            return classifications;
         }
-
-        private static readonly Dictionary<Token.Type, string> TokenToFormat = new Dictionary<Token.Type, string>
+        
+        private static readonly Dictionary<string, string> LexicalNameToFormat = new Dictionary<string, string>
         {
-            {Token.Type.Name, "ConfigNode.name" },
-            {Token.Type.Value, "ConfigNode.value" },
-            {Token.Type.Comment, "ConfigNode.comment" },
-            {Token.Type.Other, "ConfigNode" }
+            {"name", "ConfigNode.name" },
+            { "string", "ConfigNode.value" },
+            { "comment", "ConfigNode.comment" },
+            { "bool", "ConfigNode.keyword" }
         };
 
+        private bool ElementInSpan(SnapshotSpan span, SnapshotSpan target, LexicalElement element)
+        {
+            return target.Start.Position <= span.Start.Position + element.StartCursor.Location && span.Start.Position + element.StartCursor.Location <= target.End.Position;
+        }
 
-        private IClassificationType GetClassificationForToken(Token.Type tokenType)
+        private IClassificationType GetClassificationForLexicalElement(LexicalElement element)
         {
             string classificationType;
-            if (!TokenToFormat.TryGetValue(tokenType, out classificationType))
-                throw new ArgumentException("Unable to find classification type for " + tokenType.ToString(), nameof(tokenType));
-
+            if (LexicalNameToFormat.ContainsKey(element.Name))
+                classificationType = LexicalNameToFormat[element.Name];
+            else
+                classificationType = "ConfigNode";
             return classificationRegistry.GetClassificationType(classificationType);
         }
     }

@@ -42,7 +42,15 @@ namespace KSP4VS.ConfigNodeServices
         [Name("ConfigNode.comment")]
         sealed class CommentFormat : ClassificationFormatDefinition
         {
-            public CommentFormat() { ForegroundColor = Colors.LightGreen; }
+            public CommentFormat() { ForegroundColor = new Color {A = 0xFF, G = 100 }; }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = "ConfigNode.keyword")]
+        [Name("ConfigNode.keyword")]
+        sealed class KeywordFormat : ClassificationFormatDefinition
+        {
+            public KeywordFormat() { ForegroundColor = Colors.Blue; }
         }
     }
 }

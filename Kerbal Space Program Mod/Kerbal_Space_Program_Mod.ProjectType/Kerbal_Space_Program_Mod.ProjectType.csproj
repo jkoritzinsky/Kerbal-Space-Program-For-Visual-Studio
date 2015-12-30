@@ -199,12 +199,10 @@
     <Compile Include="ConfigNodeServices\ClassificationFormats.cs" />
     <Compile Include="ConfigNodeServices\ClassificationTypes.cs" />
     <Compile Include="ConfigNodeServices\Classifier.cs" />
-    <Compile Include="ConfigNodeServices\ClassifierFormat.cs" />
     <Compile Include="ConfigNodeServices\ClassifierProvider.cs" />
     <Compile Include="ConfigNodeServices\ConfigNodeImpl.cs" />
     <Compile Include="ConfigNodeServices\ContentType.cs" />
-    <Compile Include="ConfigNodeServices\InProgressNodeParser.cs" />
-    <Compile Include="ConfigNodeServices\Token.cs" />
+    <Compile Include="ConfigNodeServices\NodeParser.cs" />
     <Compile Include="MyConfiguredProject.cs" />
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
@@ -213,8 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <PegGrammar Include="ConfigNodeServices\InProgressNodeParser.peg" />
-    <None Include="ConfigNodeServices\FullNodeParser.peg" />
+    <PegGrammar Include="ConfigNodeServices\NodeParser.peg" />
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest" />
     <None Include="Key.snk" />

@@ -1,0 +1,39 @@
+@namespace KSP4VS.ConfigNodeServices
+@classname NodeParser
+@start nodes
+
+
+whitespace -lexical = "" [ \t]+
+_ = whitespace?
+string -lexical = "" [^\r\n=]+
+bool -lexical = "True" / "False"
+number = '-'? [0-9]+ ('.' [0-9]+)?
+newline -lexical = "\r\n" / "\n" 
+comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
+newlineOrComment = "" _ (newline / comment)+
+name -lexical =  "" [A-Za-z]+ 
+name_InvalidChar -lexical = &{editorMode} "" [^/ \t\r\n=]+ 
+name_all = name / name_InvalidChar
+value =  bool / number / string 
+eq -lexical =  "=" 
+bro -lexical =  "{" 
+brc -lexical =  "}"
+
+
+nameValuePair <KeyValuePair<string,string>> = _ n:name_all _ eq _ v:value newlineOrComment {new KeyValuePair<string, string>(n, v)}
+
+nameValuePair_noEq <KeyValuePair<string,string>> -lexical = &{editorMode} _ n:name_all newlineOrComment {new KeyValuePair<string, string>(n, "")}
+
+nameValuePair_noVal <KeyValuePair<string,string>> -lexical = &{editorMode} _ n:name_all _ eq newlineOrComment {new KeyValuePair<string, string>(n, "")}
+
+nameValuePair_all <KeyValuePair<string, string>> = n:(nameValuePair/ nameValuePair_noEq / nameValuePair_noVal) {n}
+
+configNodeBody <IList<ConfigNodeImpl>> = _ v:(<ConfigNodeImpl>( c:configNode_all {c} /n:nameValuePair_all {ConfigNodeImpl.CreateFromPair(n)} / ((whitespace / newlineOrComment) {new ConfigNodeImpl()})))+ _ {v}
+
+configNode <ConfigNodeImpl> = _ n:name_all _ newlineOrComment _ bro b:configNodeBody (newlineOrComment)? brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+
+configNode_noClose <ConfigNodeImpl> -lexical = &{editorMode} _ n:name_all _ newlineOrComment _ bro b:configNodeBody _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+
+configNode_all <ConfigNodeImpl> = c:(configNode / configNode_noClose) {c}
+
+nodes <IList<ConfigNodeImpl>> = n:configNode_all+ {n}
