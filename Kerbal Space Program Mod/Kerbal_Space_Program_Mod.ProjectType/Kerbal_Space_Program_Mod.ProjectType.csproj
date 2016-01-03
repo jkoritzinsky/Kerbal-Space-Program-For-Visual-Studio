@@ -168,13 +168,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PartModule\PartModule.csproj">
-      <Project>{0b3fd505-6a20-4072-8a14-58cc21ceb6b0}</Project>
-      <Name>PartModule</Name>
-      <VSIXSubPath>ItemTemplates</VSIXSubPath>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
     <ProjectReference Include="..\Kerbal_Space_Program_Mod.ProjectTemplate\Kerbal_Space_Program_Mod.ProjectTemplate.csproj">
       <Project>{ad061b25-661b-4735-aca8-99552d828642}</Project>
       <Name>Kerbal_Space_Program_Mod.ProjectTemplate</Name>

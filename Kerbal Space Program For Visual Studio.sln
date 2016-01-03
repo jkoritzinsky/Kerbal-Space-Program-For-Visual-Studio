@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kerbal_Space_Program_Mod.Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kerbal_Space_Program_Mod.ProjectTemplate", "Kerbal Space Program Mod\Kerbal_Space_Program_Mod.ProjectTemplate\Kerbal_Space_Program_Mod.ProjectTemplate.csproj", "{AD061B25-661B-4735-ACA8-99552D828642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartModule", "PartModule\PartModule.csproj", "{0B3FD505-6A20-4072-8A14-58CC21CEB6B0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{15350195-52B6-4AB2-8E37-A4081DF4BF75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartModule", "ItemTemplates\PartModule\PartModule.csproj", "{0B3FD505-6A20-4072-8A14-58CC21CEB6B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B3FD505-6A20-4072-8A14-58CC21CEB6B0} = {15350195-52B6-4AB2-8E37-A4081DF4BF75}
 	EndGlobalSection
 EndGlobal
