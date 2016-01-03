@@ -12,7 +12,7 @@ newline -lexical = "\r\n" / "\n"
 comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
 newlineOrComment = "" _ (newline / comment)+
 name -lexical =  "" [A-Za-z]+ 
-name_InvalidChar -lexical = &{editorMode} "" [^/ \t\r\n=]+ 
+name_InvalidChar -lexical = &{editorMode} "" [^/{} \t\r\n=]+ 
 name_all = name / name_InvalidChar
 value =  bool / number / string 
 eq -lexical =  "=" 
@@ -30,10 +30,10 @@ nameValuePair_all <KeyValuePair<string, string>> = n:(nameValuePair/ nameValuePa
 
 configNodeBody <IList<ConfigNodeImpl>> = _ v:(<ConfigNodeImpl>( c:configNode_all {c} /n:nameValuePair_all {ConfigNodeImpl.CreateFromPair(n)} / ((whitespace / newlineOrComment) {new ConfigNodeImpl()})))+ _ {v}
 
-configNode <ConfigNodeImpl> = _ n:name_all _ newlineOrComment _ bro b:configNodeBody (newlineOrComment)? brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+configNode <ConfigNodeImpl> = _ n:name_all _ newlineOrComment _ bro newlineOrComment? _ b:configNodeBody newlineOrComment? _ brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
 
 configNode_noClose <ConfigNodeImpl> -lexical = &{editorMode} _ n:name_all _ newlineOrComment _ bro b:configNodeBody _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
 
 configNode_all <ConfigNodeImpl> = c:(configNode / configNode_noClose) {c}
 
-nodes <IList<ConfigNodeImpl>> = n:configNode_all+ {n}
+nodes <IList<ConfigNodeImpl>> = n:configNodeBody {n}

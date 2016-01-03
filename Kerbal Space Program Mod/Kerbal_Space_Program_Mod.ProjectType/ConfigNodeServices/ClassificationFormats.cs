@@ -15,6 +15,7 @@ namespace KSP4VS.ConfigNodeServices
         [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = "ConfigNode")]
         [Name("ConfigNode")]
+        [Order(Before = Priority.Default)]
         sealed class BaseFormat : ClassificationFormatDefinition
         {
             public BaseFormat() { ForegroundColor = Colors.Black; }

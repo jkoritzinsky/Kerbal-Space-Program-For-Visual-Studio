@@ -83,7 +83,7 @@ namespace KSP4VS.ConfigNodeServices
         private IList<ClassificationSpan> GenerateSpansFromLexicalElements(SnapshotSpan span, SnapshotSpan target, IList<LexicalElement> lexicalElements)
         {
             var classifications = new List<ClassificationSpan>();
-            foreach (var element in lexicalElements.Where(element => ElementInSpan(span, target, element)).Where(element => !element.Name.Contains("_")))
+            foreach (var element in lexicalElements.Where(element => ElementInSpan(span, target, element)))
             {
                 classifications.Add(new ClassificationSpan(
                     new SnapshotSpan(span.Snapshot, 
@@ -96,6 +96,7 @@ namespace KSP4VS.ConfigNodeServices
         private static readonly Dictionary<string, string> LexicalNameToFormat = new Dictionary<string, string>
         {
             {"name", "ConfigNode.name" },
+            {"name_InvalidChar", "ConfigNode.name" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },
             { "bool", "ConfigNode.keyword" }

@@ -196,6 +196,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigNodeServices\BraceMatchingTagger.cs" />
+    <Compile Include="ConfigNodeServices\BraceMatchingTaggerProvider.cs" />
     <Compile Include="ConfigNodeServices\ClassificationFormats.cs" />
     <Compile Include="ConfigNodeServices\ClassificationTypes.cs" />
     <Compile Include="ConfigNodeServices\Classifier.cs" />
@@ -203,6 +205,8 @@
     <Compile Include="ConfigNodeServices\ConfigNodeImpl.cs" />
     <Compile Include="ConfigNodeServices\ContentType.cs" />
     <Compile Include="ConfigNodeServices\NodeParser.cs" />
+    <Compile Include="ConfigNodeServices\OutliningTagger.cs" />
+    <Compile Include="ConfigNodeServices\OutliningTaggerProvider.cs" />
     <Compile Include="MyConfiguredProject.cs" />
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
