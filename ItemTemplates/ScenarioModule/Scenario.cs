@@ -5,7 +5,8 @@ using System.Text;
 
 namespace $rootnamespace$
 {
-	public class $safeitemname$ : PartModule
-	{
-	}
+    [KSPScenario(ScenarioCreationOptions.AddToAllGames)]
+    public class $safeitemname$ : ScenarioModule
+    {
+    }
 }

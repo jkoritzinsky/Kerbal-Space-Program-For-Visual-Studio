@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>ConfigNode File</Name>
+    <Description>A configuration file containing KSP ConfigNodes.</Description>
+    <Icon>ConfigNode.ico</Icon>
+    <TemplateID>f96f28ff-3400-4e82-8b79-883966663f88</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>ConfigNode.cfg</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem TargetFileName="$safeitemname$.cfg" ReplaceParameters="true">ConfigNode.cfg</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

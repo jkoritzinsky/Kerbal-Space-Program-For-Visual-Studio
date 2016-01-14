@@ -5,7 +5,7 @@ using System.Text;
 
 namespace $rootnamespace$
 {
-	public class $safeitemname$ : PartModule
+	public class $safeitemname$ : VesselModule
 	{
 	}
 }

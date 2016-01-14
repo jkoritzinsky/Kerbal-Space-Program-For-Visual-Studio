@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace $safeprojectname$
+namespace $rootnamespace$
 {
     [KSPAddon(KSPAddon.Startup.Flight, false)]
-    class Behaviour : MonoBehaviour
+    public class $saveitemname$ : MonoBehaviour
     {
         void Awake()
         {

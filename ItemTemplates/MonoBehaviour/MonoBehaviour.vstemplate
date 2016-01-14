@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>MonoBehaviour</Name>
+    <Description>New MonoBehaviour</Description>
+    <Icon>MonoBehaviour.ico</Icon>
+    <TemplateID>b45d09a6-72ba-411e-be59-5b9961a85e90</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Behaviour.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>UnityEngine</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>Assembly-CSharp</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem TargetFileName="$safeitemname$.cs" ReplaceParameters="true">Behaviour.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

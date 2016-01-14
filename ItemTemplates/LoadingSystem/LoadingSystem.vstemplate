@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>LoadingSystem</Name>
+    <Description>LoadingSystem</Description>
+    <Icon>LoadingSystem.ico</Icon>
+    <TemplateID>8cecb9cd-7fc6-4c89-ac34-8b7a6b9299b9</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>LoadingSystem.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>Assembly-CSharp</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem TargetFileName="$safeitemname$.cs" ReplaceParameters="true">LoadingSystem.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

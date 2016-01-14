@@ -168,6 +168,48 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ItemTemplates\ConfigNode\ConfigNode.csproj">
+      <Project>{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}</Project>
+      <Name>ConfigNode</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\LoadingSystem\LoadingSystem.csproj">
+      <Project>{0997CE5A-8C1E-4128-8EB6-9D89FE561871}</Project>
+      <Name>LoadingSystem</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\MonoBehaviour\MonoBehaviour.csproj">
+      <Project>{2D8CAE89-A114-4ED7-9760-AAAD2526052A}</Project>
+      <Name>MonoBehaviour</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\PartModule\PartModule.csproj">
+      <Project>{0B3FD505-6A20-4072-8A14-58CC21CEB6B0}</Project>
+      <Name>PartModule</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\ScenarioModule\ScenarioModule.csproj">
+      <Project>{E189E5F3-F742-4446-9AC2-F2A9E4A38EE0}</Project>
+      <Name>ScenarioModule</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\VesselModule\VesselModule.csproj">
+      <Project>{929F2392-0019-43EF-BC20-38136F1DF87B}</Project>
+      <Name>VesselModule</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\Kerbal_Space_Program_Mod.ProjectTemplate\Kerbal_Space_Program_Mod.ProjectTemplate.csproj">
       <Project>{ad061b25-661b-4735-aca8-99552d828642}</Project>
       <Name>Kerbal_Space_Program_Mod.ProjectTemplate</Name>
@@ -218,7 +260,9 @@
   final implementation, and provide the basic processing for handling rules in CPS.
   -->
   <ItemGroup>
-    <None Include="BuildSystem\DeployedBuildSystem\CustomProject.Default.props" />
+    <None Include="BuildSystem\DeployedBuildSystem\CustomProject.Default.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="BuildSystem\DeployedBuildSystem\CustomProject.props" />
     <None Include="BuildSystem\DeployedBuildSystem\CustomProject.targets" />
     <None Include="BuildSystem\DeployedBuildSystem\CustomProjectCs.targets" />
