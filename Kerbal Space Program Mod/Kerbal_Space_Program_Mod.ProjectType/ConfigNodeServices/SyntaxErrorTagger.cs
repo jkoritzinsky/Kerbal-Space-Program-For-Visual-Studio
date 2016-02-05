@@ -24,7 +24,15 @@ namespace KSP4VS.ConfigNodeServices
         {
             foreach (var change in e.Changes)
             {
-                TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(new SnapshotSpan(e.After, change.NewSpan)));
+                // If there is a change in the number of close brackets, we need to re-tag everything
+                if (change.OldText.Count(c => c == '}') != change.NewText.Count(c => c == '}'))
+                {
+                    TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(new SnapshotSpan(buffer.CurrentSnapshot, new Span(0, buffer.CurrentSnapshot.Length))));
+                }
+                else
+                {
+                    TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(new SnapshotSpan(e.After, change.NewSpan)));
+                }
             }
         }
 
@@ -64,10 +72,34 @@ namespace KSP4VS.ConfigNodeServices
                 var errorSpan = new Span(startIndex, endIndex - startIndex);
                 if (errorSpan.IntersectsWith(span))
                 {
-                    var errorSnapshotSpan = new SnapshotSpan(span.Snapshot, errorSpan);
+                    var errorSnapshotSpan = EnsureOnlyOneLine(TrimWhitespace(new SnapshotSpan(span.Snapshot, errorSpan)));
                     yield return new TagSpan<ErrorTag>(errorSnapshotSpan, new ErrorTag(PredefinedErrorTypeNames.SyntaxError));
                 }
             }
+        }
+
+        private SnapshotSpan EnsureOnlyOneLine(SnapshotSpan snapshotSpan)
+        {
+            var snapshotLines = snapshotSpan.GetText().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            return new SnapshotSpan(snapshotSpan.Snapshot, snapshotSpan.Start, snapshotLines[0].Length);
+        }
+
+        private SnapshotSpan TrimWhitespace(SnapshotSpan snapshotSpan)
+        {
+            var textInSnapshot = snapshotSpan.GetText();
+            var frontTrimmed = snapshotSpan.GetText().TrimStart();
+            var startOffset = 0;
+            if (frontTrimmed.Length < textInSnapshot.Length)
+            {
+                startOffset = textInSnapshot.Length - frontTrimmed.Length;
+            }
+            var endOffset = 0;
+            var backTrimmed = snapshotSpan.GetText().TrimEnd();
+            if (backTrimmed.Length < textInSnapshot.Length)
+            {
+                endOffset = textInSnapshot.Length - backTrimmed.Length;
+            }
+            return new SnapshotSpan(snapshotSpan.Snapshot, new Span(snapshotSpan.Start + startOffset, snapshotSpan.Length - startOffset - endOffset));
         }
     }
 }
