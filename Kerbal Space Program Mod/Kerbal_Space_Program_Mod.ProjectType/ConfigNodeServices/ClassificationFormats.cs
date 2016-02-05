@@ -22,11 +22,28 @@ namespace KSP4VS.ConfigNodeServices
         }
 
         [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = "ConfigNode.error")]
+        [Name("ConfigNode.error")]
+        sealed class ErrorFormat : ClassificationFormatDefinition
+        {
+            public ErrorFormat() { }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
         [ClassificationType(ClassificationTypeNames = "ConfigNode.name")]
         [Name("ConfigNode.name")]
         sealed class NameFormat : ClassificationFormatDefinition
         {
             public NameFormat() { ForegroundColor = Colors.Maroon; }
+        }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = "ConfigNode.name.error")]
+        [Name("ConfigNode.name.error")]
+        [Order(After = Priority.Default)]
+        sealed class NameErrorFormat : ClassificationFormatDefinition
+        {
+            public NameErrorFormat() { }
         }
 
         [Export(typeof(EditorFormatDefinition))]

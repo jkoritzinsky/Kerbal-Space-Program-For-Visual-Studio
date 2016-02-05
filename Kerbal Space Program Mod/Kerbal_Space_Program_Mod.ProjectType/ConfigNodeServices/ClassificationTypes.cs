@@ -16,10 +16,23 @@ namespace KSP4VS.ConfigNodeServices
         [BaseDefinition("code")]
         internal static ClassificationTypeDefinition BaseClassificationDefinition;
 
+
+        [Export]
+        [Name("ConfigNode.error")]
+        [BaseDefinition("ConfigNode")]
+        internal static ClassificationTypeDefinition ErrorDefinition;
+
         [Export]
         [Name("ConfigNode.name")]
         [BaseDefinition("ConfigNode")]
         internal static ClassificationTypeDefinition NameDefinition;
+
+
+        [Export]
+        [Name("ConfigNode.name.error")]
+        [BaseDefinition("ConfigNode.name")]
+        [BaseDefinition("ConfigNode.error")]
+        internal static ClassificationTypeDefinition NameErrorDefinition;
 
         [Export]
         [Name("ConfigNode.keyword")]

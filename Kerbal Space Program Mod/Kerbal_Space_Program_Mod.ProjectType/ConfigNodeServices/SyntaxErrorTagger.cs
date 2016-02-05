@@ -55,10 +55,12 @@ namespace KSP4VS.ConfigNodeServices
         {
             foreach (var element in elements.Where(element => element.Name.Contains("_")))
             {
-                var startIndex = span.Start.Position + element.StartCursor.Location;
-                var endIndex = span.Start.Position + element.EndCursor.Location;
-                if (endIndex > span.End.Position)
+                var startIndex = element.StartCursor.Location;
+                var endIndex = element.EndCursor.Location;
+                if (startIndex > span.End.Position)
                     continue;
+                if (endIndex > span.End.Position)
+                    endIndex = span.End.Position;
                 var errorSpan = new Span(startIndex, endIndex - startIndex);
                 if (errorSpan.IntersectsWith(span))
                 {

@@ -96,7 +96,8 @@ namespace KSP4VS.ConfigNodeServices
         private static readonly Dictionary<string, string> LexicalNameToFormat = new Dictionary<string, string>
         {
             {"name", "ConfigNode.name" },
-            {"name_InvalidChar", "ConfigNode.name" },
+            { "name_noEq", "ConfigNode.name.error" },
+            {"name_InvalidChar", "ConfigNode.name.error" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },
             { "bool", "ConfigNode.keyword" }
