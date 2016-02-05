@@ -11,7 +11,7 @@ number = '-'? [0-9]+ ('.' [0-9]+)?
 newline -lexical = "\r\n" / "\n" 
 comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
 newlineOrComment = "" _ (newline / comment)+
-name -lexical =  "" [A-Za-z]+ 
+name -lexical =  "" [A-Za-z_]+ 
 name_InvalidChar -lexical = &{editorMode} "" [^/{} \t\r\n=]+ 
 name_all = name / name_InvalidChar
 value =  bool / number / string 

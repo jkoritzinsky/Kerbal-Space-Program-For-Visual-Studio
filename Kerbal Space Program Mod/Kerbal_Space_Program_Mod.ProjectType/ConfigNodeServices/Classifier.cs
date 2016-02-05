@@ -104,7 +104,10 @@ namespace KSP4VS.ConfigNodeServices
 
         private bool ElementInSpan(SnapshotSpan span, SnapshotSpan target, LexicalElement element)
         {
-            return target.Start.Position <= span.Start.Position + element.StartCursor.Location && span.Start.Position + element.StartCursor.Location <= target.End.Position;
+
+            var classificationSpan = new Span(span.Start.Position + element.StartCursor.Location,
+                                            element.EndCursor.Location - element.StartCursor.Location);
+            return classificationSpan.IntersectsWith(target);
         }
 
         private IClassificationType GetClassificationForLexicalElement(LexicalElement element)

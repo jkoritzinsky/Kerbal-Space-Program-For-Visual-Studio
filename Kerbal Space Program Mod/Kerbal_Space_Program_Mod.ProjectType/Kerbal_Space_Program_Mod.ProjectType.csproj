@@ -242,6 +242,8 @@
     <Compile Include="ConfigNodeServices\NodeParser.cs" />
     <Compile Include="ConfigNodeServices\OutliningTagger.cs" />
     <Compile Include="ConfigNodeServices\OutliningTaggerProvider.cs" />
+    <Compile Include="ConfigNodeServices\SyntaxErrorTagger.cs" />
+    <Compile Include="ConfigNodeServices\SyntaxErrorTaggerProvider.cs" />
     <Compile Include="MyConfiguredProject.cs" />
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
