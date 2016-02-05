@@ -1,4 +1,4 @@
-@namespace KSP4VS.ConfigNodeServices
+@namespace KSP4VS.ConfigNode
 @classname NodeParser
 @start nodes
 

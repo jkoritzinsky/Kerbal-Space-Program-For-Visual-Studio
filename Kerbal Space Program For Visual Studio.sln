@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kerbal_Space_Program_Mod.ProjectType", "Kerbal Space Program Mod\Kerbal_Space_Program_Mod.ProjectType\Kerbal_Space_Program_Mod.ProjectType.csproj", "{562B7026-D39C-4143-8E46-1A25D33A5389}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP4VS", "Kerbal Space Program Mod\Kerbal_Space_Program_Mod.ProjectType\KSP4VS.csproj", "{562B7026-D39C-4143-8E46-1A25D33A5389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kerbal_Space_Program_Mod.ProjectTemplate", "Kerbal Space Program Mod\Kerbal_Space_Program_Mod.ProjectTemplate\Kerbal_Space_Program_Mod.ProjectTemplate.csproj", "{AD061B25-661B-4735-ACA8-99552D828642}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP4VS.ProjectTemplate", "Kerbal Space Program Mod\Kerbal_Space_Program_Mod.ProjectTemplate\KSP4VS.ProjectTemplate.csproj", "{AD061B25-661B-4735-ACA8-99552D828642}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemTemplates", "ItemTemplates", "{15350195-52B6-4AB2-8E37-A4081DF4BF75}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingSystem", "ItemTemplates\LoadingSystem\LoadingSystem.csproj", "{0997CE5A-8C1E-4128-8EB6-9D89FE561871}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigNode", "ItemTemplates\ConfigNode\ConfigNode.csproj", "{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP4VS.ConfigNode", "KSP4VS.ConfigNode\KSP4VS.ConfigNode.csproj", "{73EC7C98-8BBD-42B7-9DE3-D1729664297B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectTemplates", "ProjectTemplates", "{1A5C9E05-E25A-49AD-BFA1-3CC8596716B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,11 +63,16 @@ Global
 		{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73EC7C98-8BBD-42B7-9DE3-D1729664297B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73EC7C98-8BBD-42B7-9DE3-D1729664297B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73EC7C98-8BBD-42B7-9DE3-D1729664297B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73EC7C98-8BBD-42B7-9DE3-D1729664297B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{AD061B25-661B-4735-ACA8-99552D828642} = {1A5C9E05-E25A-49AD-BFA1-3CC8596716B1}
 		{0B3FD505-6A20-4072-8A14-58CC21CEB6B0} = {15350195-52B6-4AB2-8E37-A4081DF4BF75}
 		{2D8CAE89-A114-4ED7-9760-AAAD2526052A} = {15350195-52B6-4AB2-8E37-A4081DF4BF75}
 		{E189E5F3-F742-4446-9AC2-F2A9E4A38EE0} = {15350195-52B6-4AB2-8E37-A4081DF4BF75}

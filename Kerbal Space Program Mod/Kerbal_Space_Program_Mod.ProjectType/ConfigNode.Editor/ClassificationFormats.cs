@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     static class ClassificationFormats
     {

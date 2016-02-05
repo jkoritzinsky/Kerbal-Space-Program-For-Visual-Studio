@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     static class ContentType
     {

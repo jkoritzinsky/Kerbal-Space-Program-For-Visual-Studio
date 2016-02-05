@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     internal class BraceMatchingTagger : ITagger<TextMarkerTag>
     {

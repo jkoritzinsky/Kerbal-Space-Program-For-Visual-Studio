@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Pegasus.Common;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     /// <summary>
     /// Classifier that classifies all text as an instance of the "ConfigNode" classification type.

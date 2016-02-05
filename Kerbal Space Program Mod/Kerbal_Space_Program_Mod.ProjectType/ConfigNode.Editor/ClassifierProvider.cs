@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     /// <summary>
     /// Classifier provider. It adds the classifier to the set of classifiers.

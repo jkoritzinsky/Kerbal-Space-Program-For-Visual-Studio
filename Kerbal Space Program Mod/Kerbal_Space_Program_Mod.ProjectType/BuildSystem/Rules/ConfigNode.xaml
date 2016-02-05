@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--Copyright, Microsoft Corporation, All rights reserved.-->
 <Rule
-	Name="ConfigNode"
+	Name="configNode"
 	DisplayName="Config file"
 	PageTemplate="tool"
 	Description="KSP or ModuleManager Config file"

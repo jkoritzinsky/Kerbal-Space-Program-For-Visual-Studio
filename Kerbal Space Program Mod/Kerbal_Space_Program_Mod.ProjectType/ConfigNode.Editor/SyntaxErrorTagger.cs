@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Text;
 using Pegasus.Common;
 using Microsoft.VisualStudio.Text.Adornments;
 
-namespace KSP4VS.ConfigNodeServices
+namespace KSP4VS.ConfigNode.Editor
 {
     class SyntaxErrorTagger : ITagger<ErrorTag>
     {
