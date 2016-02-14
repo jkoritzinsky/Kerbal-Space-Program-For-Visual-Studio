@@ -6,34 +6,42 @@
 whitespace -lexical = "" [ \t]+
 _ = whitespace?
 string -lexical = "" [^\r\n=]+
-bool -lexical = "True" / "False"
+bool -lexical = [Tt]"rue" / [Ff]"alse"
 number = '-'? [0-9]+ ('.' [0-9]+)?
+numberList ="" (number _) +
 newline -lexical = "\r\n" / "\n" 
 comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
 newlineOrComment = "" _ (newline / comment)+
 name -lexical =  "" [A-Za-z_]+ 
 name_InvalidChar -lexical = &{editorMode} "" [^/{} \t\r\n=]+ 
-name_all = name / name_InvalidChar
-value =  bool / number / string 
+name_InvalidChar_error = !{editorMode} "" [^/{} \t\r\n=]+  #ERROR{"Invalid characters in name"}
+name_all = name / name_InvalidChar / name_InvalidChar_error
+value =  bool / numberList / string 
 eq -lexical =  "=" 
 bro -lexical =  "{" 
 brc -lexical =  "}"
 
 
-nameValuePair <KeyValuePair<string,string>> = _ n:name_all _ eq _ v:value newlineOrComment {new KeyValuePair<string, string>(n, v)}
+nameValuePair <KeyValuePair<string,string>> = _ n:name_all _ eq _ v:("" value?) newlineOrComment {new KeyValuePair<string, string>(n, v)}
 
-nameValuePair_noEq <KeyValuePair<string,string>> -lexical = &{editorMode} _ n:name_all newlineOrComment {new KeyValuePair<string, string>(n, "")}
+nameValuePair_noEq_warn <KeyValuePair<string,string>> = &{editorMode} n:nameValuePair_noEq {n}
 
-nameValuePair_noVal <KeyValuePair<string,string>> -lexical = &{editorMode} _ n:name_all _ eq newlineOrComment {new KeyValuePair<string, string>(n, "")}
+nameValuePair_noEq <KeyValuePair<string,string>> -lexical = _ n:name_all newlineOrComment {new KeyValuePair<string, string>(n, "")}
 
-nameValuePair_all <KeyValuePair<string, string>> = n:(nameValuePair/ nameValuePair_noEq / nameValuePair_noVal) {n}
+nameValuePair_noEq_error <KeyValuePair<string,string>> = &{editorMode} _ n:name_all newlineOrComment #ERROR{"Invalid syntax for value entry"}
+
+nameValuePair_all <KeyValuePair<string, string>> = n:(nameValuePair / nameValuePair_noEq_warn / nameValuePair_noEq_error) {n}
 
 configNodeBody <IList<ConfigNodeImpl>> = _ v:(<ConfigNodeImpl>( c:configNode_all {c} /n:nameValuePair_all {ConfigNodeImpl.CreateFromPair(n)} / ((whitespace / newlineOrComment) {new ConfigNodeImpl()})))+ _ {v}
 
 configNode <ConfigNodeImpl> = _ n:name_all _ newlineOrComment _ bro newlineOrComment? _ b:configNodeBody newlineOrComment? _ brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
 
-configNode_noClose <ConfigNodeImpl> -lexical = &{editorMode} _ n:name_all _ newlineOrComment _ bro b:configNodeBody _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+configNode_noClose_warn <ConfigNodeImpl> = &{editorMode} c:configNode_noClose {c}
 
-configNode_all <ConfigNodeImpl> = c:(configNode / configNode_noClose) {c}
+configNode_noClose_error <ConfigNodeImpl> = !{editorMode} configNode_noClose #ERROR{"Unmatched open bracket."}
+
+configNode_noClose <ConfigNodeImpl> -lexical = _ n:name_all _ newlineOrComment _ bro b:configNodeBody _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+
+configNode_all <ConfigNodeImpl> = c:(configNode / configNode_noClose_warn / configNode_noClose_error) {c}
 
 nodes <IList<ConfigNodeImpl>> = n:configNodeBody {n}
