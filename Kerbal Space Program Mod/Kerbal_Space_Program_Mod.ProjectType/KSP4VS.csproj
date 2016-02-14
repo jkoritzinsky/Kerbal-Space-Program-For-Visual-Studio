@@ -164,6 +164,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CKANFile\CKANFile.csproj">
+      <Project>{ABD7B3BD-8C21-49DB-B0E5-4F0ADD603AB7}</Project>
+      <Name>CKANFile</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\..\ItemTemplates\ConfigNode\ConfigNode.csproj">
       <Project>{90BC7B28-4C0D-4A52-9B5F-5D0AE0E8E446}</Project>
       <Name>ConfigNode</Name>
@@ -337,6 +344,10 @@
     </XamlPropertyRule>
   </ItemGroup>
   <ItemGroup>
+    <XamlPropertyRule Include="BuildSystem\Rules\ckan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </XamlPropertyRule>
     <Page Include="BuildSystem\Rules\general.browseobject.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

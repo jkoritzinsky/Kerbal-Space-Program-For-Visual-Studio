@@ -1,0 +1,12 @@
+﻿{
+    "$schema": "https://raw.githubusercontent.com/KSP-CKAN/CKAN/master/CKAN.schema",
+    "spec_version": 1,
+    "name": "$rootnamespace$",
+    "abstract": "Your new mod",
+    "identifier": "KSPMod",
+    "version": "1.0",
+    "release_status": "stable",
+    "ksp_version": "1.0.5",
+    "license": "unknown",
+    "download": "http://my.download/location.zip"
+}

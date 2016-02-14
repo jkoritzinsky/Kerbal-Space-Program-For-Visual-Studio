@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rule
+    Name="ckan"
+    DisplayName="CKAN Metadata"
+    PageTemplate="tool"
+    Description="A file defining information about a mod.  For use with CKAN."
+    xmlns="http://schemas.microsoft.com/build/2009/properties">
+    <Rule.DataSource>
+        <DataSource Persistence="ProjectFile" HasConfigurationCondition="True" ItemType="CKAN" />
+    </Rule.DataSource>
+
+    <StringProperty Name="Identity" DisplayName="File Name" ReadOnly="true" Category="Misc">
+        <StringProperty.DataSource>
+            <DataSource Persistence="Intrinsic" ItemType="CKAN" PersistedName="Identity" />
+        </StringProperty.DataSource>
+    </StringProperty>
+
+    <StringProperty Name="FullPath" DisplayName="Full Path" ReadOnly="true" Category="Misc">
+        <StringProperty.DataSource>
+            <DataSource Persistence="Intrinsic" ItemType="CKAN" PersistedName="FullPath" />
+        </StringProperty.DataSource>
+    </StringProperty>
+</Rule>

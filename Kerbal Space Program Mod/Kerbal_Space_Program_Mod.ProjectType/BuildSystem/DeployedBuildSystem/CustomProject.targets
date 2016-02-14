@@ -21,17 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
-		<PropertyPageSchema Include="
-												$(MSBuildThisFileDirectory)Rules\general.xaml;
+        <PropertyPageSchema Include="
+                                                $(MSBuildThisFileDirectory)Rules\general.xaml;
                         $(MSBuildThisFileDirectory)Rules\CustomPropertyPage.xaml;
-												">
+                                                ">
         <Context>Project</Context>
-		</PropertyPageSchema>
-		<PropertyPageSchema Include="
-												$(MSBuildThisFileDirectory)Rules\ProjectItemsSchema.xaml;
-												"/>
+        </PropertyPageSchema>
+        <PropertyPageSchema Include="
+                                                $(MSBuildThisFileDirectory)Rules\ProjectItemsSchema.xaml;
+                                                "/>
     <PropertyPageSchema Include="
-												$(MSBuildThisFileDirectory)Rules\debugger_general.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\debugger_general.xaml;
                         ">
       <Context>Project</Context>
     </PropertyPageSchema>
@@ -50,19 +50,19 @@
       <Context>File;BrowseObject</Context>
     </PropertyPageSchema>
     <PropertyPageSchema Include="
-												$(MSBuildThisFileDirectory)Rules\assemblyreference.xaml;
-												$(MSBuildThisFileDirectory)Rules\comreference.xaml;
-												$(MSBuildThisFileDirectory)Rules\projectreference.xaml;
-												$(MSBuildThisFileDirectory)Rules\sdkreference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\assemblyreference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\comreference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\projectreference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\sdkreference.xaml;
                         ">
       <Context>;BrowseObject</Context>
     </PropertyPageSchema>
 
     <PropertyPageSchema Include="
-												$(MSBuildThisFileDirectory)Rules\ResolvedAssemblyReference.xaml;
-												$(MSBuildThisFileDirectory)Rules\ResolvedCOMReference.xaml;
-												$(MSBuildThisFileDirectory)Rules\ResolvedProjectReference.xaml;
-												$(MSBuildThisFileDirectory)Rules\ResolvedSDKReference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\ResolvedAssemblyReference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\ResolvedCOMReference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\ResolvedProjectReference.xaml;
+                                                $(MSBuildThisFileDirectory)Rules\ResolvedSDKReference.xaml;
                         ">
       <Context>ProjectSubscriptionService;BrowseObject</Context>
     </PropertyPageSchema>
@@ -71,6 +71,9 @@
       <Context>BrowseObject</Context>
     </PropertyPageSchema>
       <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\ConfigNode.xaml;">
+          <Context>File;BrowseObject</Context>
+      </PropertyPageSchema>
+      <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\ckan.xaml;">
           <Context>File;BrowseObject</Context>
       </PropertyPageSchema>
   </ItemGroup>

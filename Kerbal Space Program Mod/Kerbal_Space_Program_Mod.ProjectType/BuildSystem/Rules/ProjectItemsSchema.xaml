@@ -39,11 +39,18 @@
         ItemType="ConfigNode">
     </ContentType>
 
+    <ContentType
+        Name="CKAN"
+        DisplayName="CKAN Metadata"
+        ItemType="CKAN">
+    </ContentType>
+
     <ItemType Name="Compile" DisplayName="C# compiler"/>
     <ItemType Name="EmbeddedResource" DisplayName="Embedded Resource"/>
     <ItemType Name="None" DisplayName="Does not participate in build"/>
     <ItemType Name="Content" DisplayName="Content" />
     <ItemType Name="ConfigNode" DisplayName="KSP or ModuleManager Config File" />
+    <ItemType Name="CKAN" DisplayName="CKAN Metadata" />
 
     <FileExtension Name=".asax" ContentType="Asax"/>
     <FileExtension Name=".asmx" ContentType="HTML"/>
@@ -66,5 +73,6 @@
     <FileExtension Name=".cd" ContentType="ClassDiagram"/>
     <FileExtension Name=".licenses" ContentType="Licenses"/>
     <FileExtension Name=".cfg" ContentType="ConfigNode" />
+    <FileExtension Name=".ckan" ContentType="CKAN" />
 </ProjectSchemaDefinitions>
 

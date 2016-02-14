@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>CKAN File</Name>
+    <Description>A metadata file for CKAN</Description>
+    <Icon>ckan.ico</Icon>
+    <TemplateID>bb59eced-dda8-45f5-a635-4d240e913f18</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>CKAN.ckan</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem TargetFileName="$rootnamespace$.ckan" ReplaceParameters="true">CKAN.ckan</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
