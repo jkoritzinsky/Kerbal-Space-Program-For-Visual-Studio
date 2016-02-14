@@ -46,7 +46,7 @@ namespace KSP4VS.ConfigNode.Editor
                     var startLine = currentSnapshot.GetLineFromLineNumber(region.StartLine);
                     var endLine = currentSnapshot.GetLineFromLineNumber(region.EndLine);
 
-                    //the region starts at the beginning of the "[", and goes until the *end* of the line that contains the "]".
+                    //the region starts at the beginning of the "{", and goes until the *end* of the line that contains the "}".
                     yield return new TagSpan<IOutliningRegionTag>(
                         new SnapshotSpan(startLine.Start + region.StartOffset,
                         endLine.End),

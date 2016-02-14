@@ -46,10 +46,10 @@ namespace KSP4VS.ConfigNode.Editor
             {
                 //Reparse the whole thing.  It's just must simpler
                 var spanToParse = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
-                IList<LexicalElement> lexicalElements;
-                parser.Parse(spanToParse.GetText(), "Editor", out lexicalElements);
                 try
                 {
+                    IList<LexicalElement> lexicalElements;
+                    parser.Parse(spanToParse.GetText(), "Editor", out lexicalElements);
                     tags.AddRange(GetTagsFromElements(lexicalElements, span));
                 }
                 catch (FormatException)
@@ -73,7 +73,7 @@ namespace KSP4VS.ConfigNode.Editor
                 if (errorSpan.IntersectsWith(span))
                 {
                     var errorSnapshotSpan = EnsureOnlyOneLine(TrimWhitespace(new SnapshotSpan(span.Snapshot, errorSpan)));
-                    yield return new TagSpan<ErrorTag>(errorSnapshotSpan, new ErrorTag(PredefinedErrorTypeNames.SyntaxError));
+                    yield return new TagSpan<ErrorTag>(errorSnapshotSpan, new ErrorTag(PredefinedErrorTypeNames.SyntaxError, ErrorMessageMap.Map(element.Name)));
                 }
             }
         }
@@ -81,6 +81,10 @@ namespace KSP4VS.ConfigNode.Editor
         private SnapshotSpan EnsureOnlyOneLine(SnapshotSpan snapshotSpan)
         {
             var snapshotLines = snapshotSpan.GetText().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (snapshotLines.Length == 0)
+            {
+                return snapshotSpan;
+            }
             return new SnapshotSpan(snapshotSpan.Snapshot, snapshotSpan.Start, snapshotLines[0].Length);
         }
 
@@ -99,7 +103,8 @@ namespace KSP4VS.ConfigNode.Editor
             {
                 endOffset = textInSnapshot.Length - backTrimmed.Length;
             }
-            return new SnapshotSpan(snapshotSpan.Snapshot, new Span(snapshotSpan.Start + startOffset, snapshotSpan.Length - startOffset - endOffset));
+            var length = snapshotSpan.Length - startOffset - endOffset;
+            return new SnapshotSpan(snapshotSpan.Snapshot, new Span(snapshotSpan.Start + startOffset, length >= 0 ? length : 0));
         }
     }
 }
