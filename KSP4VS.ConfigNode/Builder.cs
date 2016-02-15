@@ -13,7 +13,6 @@ namespace KSP4VS.ConfigNode
 
         public Builder(string text, IEnumerable<LexicalElement> lexical)
         {
-            //ast = BuildAST(text, lexical.OrderBy(element => element.StartCursor.Location).ThenByDescending(element => element.EndCursor.Location)).Item1;
             ast = BuildAST(text, lexical.Reverse()).Item1;
         }
 
