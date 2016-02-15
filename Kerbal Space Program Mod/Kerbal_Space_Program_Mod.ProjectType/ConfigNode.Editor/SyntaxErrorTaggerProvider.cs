@@ -17,9 +17,7 @@ namespace KSP4VS.ConfigNode.Editor
     {
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
-            //create a single tagger for each buffer.
-            Func<ITagger<T>> sc = delegate () { return new SyntaxErrorTagger(buffer) as ITagger<T>; };
-            return buffer.Properties.GetOrCreateSingletonProperty(sc);
+            return buffer.Properties.GetOrCreateSingletonProperty(() => (ITagger<T>)new SyntaxErrorTagger(buffer.GetBufferParser()));
         }
     }
 }

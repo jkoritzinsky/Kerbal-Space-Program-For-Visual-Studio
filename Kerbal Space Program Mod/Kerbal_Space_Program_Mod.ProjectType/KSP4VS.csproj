@@ -242,11 +242,13 @@
   <ItemGroup>
     <Compile Include="ConfigNode.Editor\BraceMatchingTagger.cs" />
     <Compile Include="ConfigNode.Editor\BraceMatchingTaggerProvider.cs" />
+    <Compile Include="ConfigNode.Editor\BufferParser.cs" />
     <Compile Include="ConfigNode.Editor\ClassificationFormats.cs" />
     <Compile Include="ConfigNode.Editor\ClassificationTypes.cs" />
     <Compile Include="ConfigNode.Editor\Classifier.cs" />
     <Compile Include="ConfigNode.Editor\ClassifierProvider.cs" />
     <Compile Include="ConfigNode.Editor\ContentType.cs" />
+    <Compile Include="ConfigNode.Editor\TextBuffer.cs" />
     <Compile Include="ConfigNode.Editor\OutliningTagger.cs" />
     <Compile Include="ConfigNode.Editor\OutliningTaggerProvider.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTagger.cs" />

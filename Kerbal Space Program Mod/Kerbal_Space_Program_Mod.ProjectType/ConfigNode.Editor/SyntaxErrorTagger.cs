@@ -12,20 +12,22 @@ namespace KSP4VS.ConfigNode.Editor
 {
     class SyntaxErrorTagger : ITagger<ErrorTag>
     {
+        private readonly BufferParser parser;
         ITextBuffer buffer;
 
-        public SyntaxErrorTagger(ITextBuffer buffer)
+        public SyntaxErrorTagger(BufferParser parser)
         {
-            this.buffer = buffer;
+            buffer = parser.Buffer;
             buffer.Changed += BufferChanged;
+            this.parser = parser;
         }
 
         private void BufferChanged(object sender, TextContentChangedEventArgs e)
         {
             foreach (var change in e.Changes)
             {
-                // If there is a change in the number of close brackets, we need to re-tag everything
-                if (change.OldText.Count(c => c == '}') != change.NewText.Count(c => c == '}'))
+                // If there is a change in the number of brackets, we need to re-tag everything
+                if (change.OldText.Count(c => c == '}' || c == '{') != change.NewText.Count(c => c == '}' || c == '{'))
                 {
                     TagsChanged?.Invoke(this, new SnapshotSpanEventArgs(new SnapshotSpan(buffer.CurrentSnapshot, new Span(0, buffer.CurrentSnapshot.Length))));
                 }
@@ -40,22 +42,12 @@ namespace KSP4VS.ConfigNode.Editor
 
         public IEnumerable<ITagSpan<ErrorTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
-            var parser = new NodeParser(true);
             var tags = new List<ITagSpan<ErrorTag>>();
             foreach (var span in spans)
             {
-                //Reparse the whole thing.  It's just must simpler
-                var spanToParse = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
-                try
-                {
-                    IList<LexicalElement> lexicalElements;
-                    parser.Parse(spanToParse.GetText(), "Editor", out lexicalElements);
-                    tags.AddRange(GetTagsFromElements(lexicalElements, span));
-                }
-                catch (FormatException)
-                {
-                }
+                tags.AddRange(GetTagsFromElements(parser.ParsedRepresentation, span));
             }
+            var test = parser.AST;
             return tags;
         }
 

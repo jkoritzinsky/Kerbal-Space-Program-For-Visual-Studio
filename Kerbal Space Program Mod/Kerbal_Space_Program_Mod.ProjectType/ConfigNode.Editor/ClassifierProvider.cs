@@ -39,7 +39,7 @@ namespace KSP4VS.ConfigNode.Editor
         /// <returns>A classifier for the text buffer, or null if the provider cannot do so in its current state.</returns>
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
-            return buffer.Properties.GetOrCreateSingletonProperty<Classifier>(creator: () => new Classifier(buffer, this.classificationRegistry));
+            return buffer.Properties.GetOrCreateSingletonProperty(creator: () => new Classifier(buffer.GetBufferParser(), this.classificationRegistry));
         }
 
         #endregion

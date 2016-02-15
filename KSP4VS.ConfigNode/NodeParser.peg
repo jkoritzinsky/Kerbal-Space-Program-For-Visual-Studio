@@ -3,39 +3,39 @@
 @start nodes
 
 
-whitespace -lexical = "" [ \t]+
+whitespace = "" [ \t]+
 _ = whitespace?
 string -lexical = "" [^\r\n=]+
 bool -lexical = [Tt]"rue" / [Ff]"alse"
 number = '-'? [0-9]+ ('.' [0-9]+)?
-numberList ="" (number) ("" _ ","? _ number)*
-newline -lexical = "\r\n" / "\n" 
+numberList -lexical ="" (number) ("" _ ","? _ number)*
+newline = "\r\n" / "\n" 
 comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
 newlineOrComment = "" _ (newline / comment)+
 name -lexical =  "" [A-Za-z_]+ 
-name_InvalidChar_warn -lexical = &{editorMode} "" name_InvalidChar
+name_InvalidChar_warn = &{editorMode} "" name_InvalidChar
 name_InvalidChar -lexical = "" [^/{} \t\r\n=]+
 name_InvalidChar_error = !{editorMode} "" name_InvalidChar  #ERROR{ErrorMessageMap.MapFromParser()}
 name_all = name / name_InvalidChar_warn / name_InvalidChar_error
 value =  bool / numberList / string 
-eq -lexical =  "=" 
-bro -lexical =  "{" 
-brc -lexical =  "}"
+eq =  "=" 
+bro =  "{" 
+brc  =  "}"
 
 
-nameValuePair <KeyValuePair<string,string>> = _ n:name_all _ eq _ v:("" value?) newlineOrComment {new KeyValuePair<string, string>(n, v)}
+nameValuePair <KeyValuePair<string,string>> -lexical = n:name_all _ eq _ v:("" value?) {new KeyValuePair<string, string>(n, v)}
 
 nameValuePair_noEq_warn <KeyValuePair<string,string>> = &{editorMode} n:nameValuePair_noEq {n}
 
-nameValuePair_noEq <KeyValuePair<string,string>> -lexical = _ n:name_all newlineOrComment {new KeyValuePair<string, string>(n, "")}
+nameValuePair_noEq <KeyValuePair<string,string>> -lexical = _ n:name_all {new KeyValuePair<string, string>(n, "")}
 
-nameValuePair_noEq_error <KeyValuePair<string,string>> = &{editorMode} _ n:name_all newlineOrComment #ERROR{ErrorMessageMap.MapFromParser()}
+nameValuePair_noEq_error <KeyValuePair<string,string>> = !{editorMode} nameValuePair_noEq #ERROR{ErrorMessageMap.MapFromParser()}
 
-nameValuePair_all <KeyValuePair<string, string>> = n:(nameValuePair / nameValuePair_noEq_warn / nameValuePair_noEq_error) {n}
+nameValuePair_all <KeyValuePair<string, string>> = _ n:(nameValuePair / nameValuePair_noEq_warn / nameValuePair_noEq_error) newlineOrComment {n}
 
 configNodeBody <IList<ConfigNodeImpl>> = _ v:(<ConfigNodeImpl>( c:configNode_all {c} /n:nameValuePair_all {ConfigNodeImpl.CreateFromPair(n)} / ((whitespace / newlineOrComment) {new ConfigNodeImpl()})))* _ {v}
 
-configNode <ConfigNodeImpl> = _ n:name_all _ newlineOrComment _ bro newlineOrComment? _ b:configNodeBody newlineOrComment? _ brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
+configNode <ConfigNodeImpl> -lexical = _ n:name_all _ newlineOrComment _ bro newlineOrComment? _ b:configNodeBody newlineOrComment? _ brc _ newlineOrComment? {ConfigNodeImpl.MergeNodes(b, n)}
 
 configNode_noClose_warn <ConfigNodeImpl> = &{editorMode} c:configNode_noClose {c}
 
@@ -45,4 +45,4 @@ configNode_noClose <ConfigNodeImpl> -lexical = _ n:name_all _ newlineOrComment _
 
 configNode_all <ConfigNodeImpl> = c:(configNode / configNode_noClose_warn / configNode_noClose_error) {c}
 
-nodes <IList<ConfigNodeImpl>> = n:configNodeBody {n}
+nodes <IList<ConfigNodeImpl>> -lexical = n:configNodeBody {n}

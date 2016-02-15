@@ -18,26 +18,17 @@ namespace KSP4VS.ConfigNode.Editor
     /// </summary>
     internal class Classifier : IClassifier
     {
-        private ITextBuffer buffer;
+        private BufferParser parser;
         private IClassificationTypeRegistryService classificationRegistry;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Classifier"/> class.
         /// </summary>
         /// <param name="registry">Classification registry.</param>
-        public Classifier(ITextBuffer buffer, IClassificationTypeRegistryService classificationRegistry)
+        public Classifier(BufferParser parser, IClassificationTypeRegistryService classificationRegistry)
         {
-            this.buffer = buffer;
-            this.buffer.Changed += BufferChanged;
+            this.parser = parser;
             this.classificationRegistry = classificationRegistry;
-        }
-
-        private void BufferChanged(object sender, TextContentChangedEventArgs e)
-        {
-            foreach (var change in e.Changes)
-            {
-                ClassificationChanged?.Invoke(this, new ClassificationChangedEventArgs(new SnapshotSpan(e.After, change.NewSpan)));
-            }
         }
 
 #pragma warning disable 67
@@ -65,19 +56,8 @@ namespace KSP4VS.ConfigNode.Editor
         /// <returns>A list of ClassificationSpans that represent spans identified to be of this classification.</returns>
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
-            //Reparse the whole thing.  It's just must simpler
-            var spanToParse = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
-            var parser = new NodeParser(true);
-            IList<LexicalElement> lexicalElements;
-            try
-            {
-                parser.Parse(spanToParse.GetText(), "Editor", out lexicalElements);
-                return GenerateSpansFromLexicalElements(spanToParse, span, lexicalElements);
-            }
-            catch (FormatException)
-            {
-                return new List<ClassificationSpan> { new ClassificationSpan(span, classificationRegistry.GetClassificationType("ConfigNode")) };
-            }
+            var fullSpan = new SnapshotSpan(span.Snapshot, new Span(0, span.Snapshot.Length));
+            return GenerateSpansFromLexicalElements(fullSpan, span, parser.ParsedRepresentation);
         }
 
         private IList<ClassificationSpan> GenerateSpansFromLexicalElements(SnapshotSpan span, SnapshotSpan target, IList<LexicalElement> lexicalElements)
