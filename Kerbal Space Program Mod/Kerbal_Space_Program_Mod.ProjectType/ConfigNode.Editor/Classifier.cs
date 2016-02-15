@@ -75,15 +75,13 @@ namespace KSP4VS.ConfigNode.Editor
         
         private static readonly Dictionary<string, string> LexicalNameToFormat = new Dictionary<string, string>
         {
-            {"name", "ConfigNode.name" },
-            { "name_noEq", "ConfigNode.name.error" },
-            {"name_InvalidChar", "ConfigNode.name.error" },
+            { "name", "ConfigNode.name" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },
             { "bool", "ConfigNode.keyword" }
         };
 
-        private bool ElementInSpan(SnapshotSpan span, SnapshotSpan target, LexicalElement element)
+        private static bool ElementInSpan(SnapshotSpan span, SnapshotSpan target, LexicalElement element)
         {
 
             var classificationSpan = new Span(span.Start.Position + element.StartCursor.Location,

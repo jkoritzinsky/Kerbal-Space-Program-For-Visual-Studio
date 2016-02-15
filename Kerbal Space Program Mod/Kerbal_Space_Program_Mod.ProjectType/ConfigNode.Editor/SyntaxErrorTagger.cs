@@ -47,7 +47,6 @@ namespace KSP4VS.ConfigNode.Editor
             {
                 tags.AddRange(GetTagsFromElements(parser.ParsedRepresentation, span));
             }
-            var test = parser.AST;
             return tags;
         }
 

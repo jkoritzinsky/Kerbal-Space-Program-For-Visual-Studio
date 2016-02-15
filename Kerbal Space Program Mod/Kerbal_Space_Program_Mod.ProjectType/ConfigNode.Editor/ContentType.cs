@@ -10,7 +10,9 @@ namespace KSP4VS.ConfigNode.Editor
 {
     static class ContentType
     {
-        public const string Name = "ConfigNode";
+        public const string Name = nameof(ConfigNode);
+
+#pragma warning disable 649
 
         [Export]
         [Name(Name)]
@@ -22,5 +24,7 @@ namespace KSP4VS.ConfigNode.Editor
         [FileExtension(".cfg")]
         [ContentType(Name)]
         public static FileExtensionToContentTypeDefinition TestFileExtensionDefinition;
+
+#pragma warning restore 649
     }
 }

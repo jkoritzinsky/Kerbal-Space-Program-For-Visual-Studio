@@ -11,28 +11,16 @@ namespace KSP4VS.ConfigNode.Editor
 {
     static class ClassificationTypes
     {
+#pragma warning disable 649
         [Export]
         [Name("ConfigNode")]
         [BaseDefinition("code")]
         internal static ClassificationTypeDefinition BaseClassificationDefinition;
 
-
-        [Export]
-        [Name("ConfigNode.error")]
-        [BaseDefinition("ConfigNode")]
-        internal static ClassificationTypeDefinition ErrorDefinition;
-
         [Export]
         [Name("ConfigNode.name")]
         [BaseDefinition("ConfigNode")]
         internal static ClassificationTypeDefinition NameDefinition;
-
-
-        [Export]
-        [Name("ConfigNode.name.error")]
-        [BaseDefinition("ConfigNode.name")]
-        [BaseDefinition("ConfigNode.error")]
-        internal static ClassificationTypeDefinition NameErrorDefinition;
 
         [Export]
         [Name("ConfigNode.keyword")]
@@ -64,5 +52,7 @@ namespace KSP4VS.ConfigNode.Editor
         [BaseDefinition("ConfigNode.name.node")]
         [BaseDefinition("ConfigNode.selector")]
         internal static ClassificationTypeDefinition NameSelectorDefinition;
+
+#pragma warning restore 649
     }
 }

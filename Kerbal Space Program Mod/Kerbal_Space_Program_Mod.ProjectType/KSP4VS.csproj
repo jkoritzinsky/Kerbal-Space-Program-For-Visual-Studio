@@ -164,8 +164,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CKANFile\CKANFile.csproj">
-      <Project>{ABD7B3BD-8C21-49DB-B0E5-4F0ADD603AB7}</Project>
+    <ProjectReference Include="..\..\ItemTemplates\CKANFile\CKANFile.csproj">
+      <Project>{abd7b3bd-8c21-49db-b0e5-4f0add603ab7}</Project>
       <Name>CKANFile</Name>
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

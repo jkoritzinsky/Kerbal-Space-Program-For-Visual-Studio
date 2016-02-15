@@ -18,15 +18,7 @@ namespace KSP4VS.ConfigNode.Editor
         [Order(Before = Priority.Default)]
         sealed class BaseFormat : ClassificationFormatDefinition
         {
-            public BaseFormat() { ForegroundColor = Colors.Black; }
-        }
-
-        [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = "ConfigNode.error")]
-        [Name("ConfigNode.error")]
-        sealed class ErrorFormat : ClassificationFormatDefinition
-        {
-            public ErrorFormat() { }
+            public BaseFormat() { }
         }
 
         [Export(typeof(EditorFormatDefinition))]
@@ -35,15 +27,6 @@ namespace KSP4VS.ConfigNode.Editor
         sealed class NameFormat : ClassificationFormatDefinition
         {
             public NameFormat() { ForegroundColor = Colors.Maroon; }
-        }
-
-        [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = "ConfigNode.name.error")]
-        [Name("ConfigNode.name.error")]
-        [Order(After = Priority.Default)]
-        sealed class NameErrorFormat : ClassificationFormatDefinition
-        {
-            public NameErrorFormat() { }
         }
 
         [Export(typeof(EditorFormatDefinition))]
