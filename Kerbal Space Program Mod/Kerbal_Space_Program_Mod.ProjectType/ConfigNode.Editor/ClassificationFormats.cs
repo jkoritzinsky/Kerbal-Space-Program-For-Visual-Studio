@@ -53,5 +53,14 @@ namespace KSP4VS.ConfigNode.Editor
         {
             public KeywordFormat() { ForegroundColor = Colors.Blue; }
         }
+
+        [Export(typeof(EditorFormatDefinition))]
+        [ClassificationType(ClassificationTypeNames = "ConfigNode.selector")]
+        [Name("ConfigNode.selector")]
+        [Order(After = Priority.Default)]
+        sealed class SelectorFormat : ClassificationFormatDefinition
+        {
+            public SelectorFormat() { ForegroundColor = new Color { A = 0xFF, R = 0x00, G = 120, B = 120 }; }
+        }
     }
 }

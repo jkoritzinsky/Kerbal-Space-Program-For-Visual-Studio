@@ -77,6 +77,8 @@ namespace KSP4VS.ConfigNode.Editor
         {
             { "name", "ConfigNode.name" },
             { "name_InvalidChar", "ConfigNode.name" },
+            { "MMname", "ConfigNode.selector" },
+            { "hasDeclaration", "ConfigNode.selector" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },
             { "bool", "ConfigNode.keyword" }

@@ -4,44 +4,66 @@
 
 whitespace = "" [ \t]+
 _ = whitespace?
-string -lexical = "" [^\r\n=]+
-bool -lexical = [Tt]"rue" / [Ff]"alse"
-number = '-'? [0-9]+ ('.' [0-9]+)?
-numberList -lexical ="" (number) ("" _ ","? _ number)*
+eq =  "=" 
+bro =  "{" 
+brc  =  "}"
 newline = "\r\n" / "\n" 
+
 comment -lexical =  "//" [^\r\n]* ("\r\n" / "\n")?  
 newlineOrComment = "" _ (newline / comment)+
+
+string -lexical = "" [^\r\n=]+
+bool -lexical = [Tt]"rue" / [Ff]"alse" &newlineOrComment
+number = '-'? [0-9]+ ('.' [0-9]+)?
+numberListComma -lexical = "" (number) ("" _ "," _ number)*
+numberListSpace -lexical ="" (number) ("" whitespace number)*
+numberList -lexical ="" (numberListSpace / numberListComma) &newlineOrComment
+
+
 name -lexical =  "" [A-Za-z_]+ 
 name_InvalidChar_warn = &{editorMode} "" name_InvalidChar
 name_InvalidChar -lexical = "" ([^/{} \t\r\n=])+
 name_InvalidChar_error = !{editorMode} "" name_InvalidChar  #ERROR{ErrorMessageMap.MapFromParser()}
-name_all = (name / name_InvalidChar_warn / name_InvalidChar_error) (name_InvalidChar_warn / name_InvalidChar_error)?
-value =  bool / numberList / string 
-eq =  "=" 
-bro =  "{" 
-brc  =  "}"
+
+topOp = [@+$%!-]
+MMnamePattern = [A-Za-z0-9?*_-]+
+nameSelector = "["MMnamePattern?"]"
+MMname -lexical = topOp name
+MMselectWithOp = MMname nameSelector?
+MMselectWithoutOp = name nameSelector
+
+hasOp = [@!#~]
+hasBody = hasOp MMselectWithoutOp
+hasDeclaration -lexical = "HAS"
+hasExpression = ":" hasDeclaration "[" hasBody "]"
+
+MMselector = (MMselectWithOp / MMselectWithoutOp) hasExpression*
+
+name_all = (MMselector / name / name_InvalidChar_warn / name_InvalidChar_error) (name_InvalidChar_warn / name_InvalidChar_error)?
+
+value =  (bool / numberList / string)
 
 
-nameValuePair  -lexical = n:name_all _ eq _ v:("" value?) 
+nameValuePair  -lexical = name_all _ eq _ v:("" value?) 
 
 nameValuePair_noEq_warn  = &{editorMode} n:nameValuePair_noEq 
 
-nameValuePair_noEq  -lexical = _ n:name_all 
+nameValuePair_noEq  -lexical = _ name_all 
 
 nameValuePair_noEq_error  = !{editorMode} nameValuePair_noEq #ERROR{ErrorMessageMap.MapFromParser()}
 
 nameValuePair_all = _ (nameValuePair / nameValuePair_noEq_warn / nameValuePair_noEq_error) newlineOrComment 
 
-configNodeBody  = _ v:(( c:configNode_all  /n:nameValuePair_all  / ((whitespace / newlineOrComment) )))* _ 
+configNodeBody = _ (configNode_all  / nameValuePair_all  / (whitespace / newlineOrComment))* _
 
-configNode  -lexical = _ n:name_all _ newlineOrComment? _ bro newlineOrComment? _ b:configNodeBody newlineOrComment? _ brc _ newlineOrComment? 
+configNode  -lexical = _ name_all _ newlineOrComment? _ bro newlineOrComment? _ configNodeBody newlineOrComment? _ brc _ newlineOrComment? 
 
 configNode_noClose_warn  = &{editorMode} c:configNode_noClose 
 
 configNode_noClose_error  = !{editorMode} configNode_noClose #ERROR{ErrorMessageMap.MapFromParser()}
 
-configNode_noClose  -lexical = _ n:name_all _ newlineOrComment _ bro b:configNodeBody _ newlineOrComment? 
+configNode_noClose  -lexical = _ name_all _ newlineOrComment _ bro configNodeBody _ newlineOrComment? 
 
-configNode_all  = c:(configNode / configNode_noClose_warn / configNode_noClose_error) 
+configNode_all  = configNode / configNode_noClose_warn / configNode_noClose_error
 
-nodes  -lexical = n:configNodeBody 
+nodes  -lexical = configNodeBody 

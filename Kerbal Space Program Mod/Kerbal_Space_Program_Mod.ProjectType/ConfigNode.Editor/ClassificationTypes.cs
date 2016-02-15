@@ -47,12 +47,6 @@ namespace KSP4VS.ConfigNode.Editor
         [BaseDefinition("ConfigNode.name")]
         internal static ClassificationTypeDefinition SelectorDefinition;
 
-        [Export]
-        [Name("ConfigNode.nameSelector")]
-        [BaseDefinition("ConfigNode.name.node")]
-        [BaseDefinition("ConfigNode.selector")]
-        internal static ClassificationTypeDefinition NameSelectorDefinition;
-
 #pragma warning restore 649
     }
 }

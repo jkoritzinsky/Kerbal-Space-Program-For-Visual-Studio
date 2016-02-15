@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="EditorParseTests.cs" />
     <Compile Include="NodeBuilderTests.cs" />
+    <Compile Include="SimpleModuleManagerTests.cs" />
     <Compile Include="StandardParseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
