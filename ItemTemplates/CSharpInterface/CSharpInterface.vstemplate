@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>C# Interface</Name>
+    <Description>A regular interface in C#</Description>
+    <Icon>CSharpInterface.ico</Icon>
+    <TemplateID>c84da76a-ae40-4238-9471-e7c1abb4c659</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Interface.cs</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem TargetFileName="$safeitemname$.cs" ReplaceParameters="true">Interface.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

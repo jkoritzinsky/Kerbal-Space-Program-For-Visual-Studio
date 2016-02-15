@@ -185,6 +185,20 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\CSharpClass\CSharpClass.csproj">
+      <Project>{E33A6FEA-2FC4-40C7-B505-C695A59E02E6}</Project>
+      <Name>CSharpClass</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ItemTemplates\CSharpInterface\CSharpInterface.csproj">
+      <Project>{0518CB84-DB88-4A21-BE6C-F56E95F58A8C}</Project>
+      <Name>CSharpInterface</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\..\ItemTemplates\LoadingSystem\LoadingSystem.csproj">
       <Project>{0997CE5A-8C1E-4128-8EB6-9D89FE561871}</Project>
       <Name>LoadingSystem</Name>
