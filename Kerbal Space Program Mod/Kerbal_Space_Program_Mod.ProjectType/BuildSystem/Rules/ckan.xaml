@@ -3,7 +3,7 @@
     Name="ckan"
     DisplayName="CKAN Metadata"
     PageTemplate="tool"
-    Description="A file defining information about a mod.  For use with CKAN."
+    Description="CKAN Metadata file."
     xmlns="http://schemas.microsoft.com/build/2009/properties">
     <Rule.DataSource>
         <DataSource Persistence="ProjectFile" HasConfigurationCondition="True" ItemType="CKAN" />

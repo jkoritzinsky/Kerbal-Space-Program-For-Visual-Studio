@@ -76,11 +76,17 @@
       <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\ckan.xaml;">
           <Context>File;BrowseObject</Context>
       </PropertyPageSchema>
+      <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\avc.xaml;">
+          <Context>File;BrowseObject</Context>
+      </PropertyPageSchema>
   </ItemGroup>
 
 
-    <Target Name="CopyConfigNodes" BeforeTargets="AfterBuild">
+    <Target Name="CopyConfigNodes" AfterTargets="Build">
         <Copy SourceFiles="@(ConfigNode)" DestinationFolder="$(OutputPath)" />
+    </Target>
+    <Target Name="CopyAVC" AfterTargets="Build">
+        <Copy SourceFiles="@(AVC)" DestinationFolder="$(OutputPath)" />
     </Target>
     
 </Project>

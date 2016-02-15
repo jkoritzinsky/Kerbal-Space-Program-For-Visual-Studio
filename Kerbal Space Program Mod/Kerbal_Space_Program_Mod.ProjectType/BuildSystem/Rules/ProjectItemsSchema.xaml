@@ -45,12 +45,19 @@
         ItemType="CKAN">
     </ContentType>
 
+    <ContentType
+        Name="AVC"
+        DisplayName="KSP-AVC .version File"
+        ItemType="AVC">
+    </ContentType>
+
     <ItemType Name="Compile" DisplayName="C# compiler"/>
     <ItemType Name="EmbeddedResource" DisplayName="Embedded Resource"/>
     <ItemType Name="None" DisplayName="Does not participate in build"/>
     <ItemType Name="Content" DisplayName="Content" />
     <ItemType Name="ConfigNode" DisplayName="KSP or ModuleManager Config File" />
     <ItemType Name="CKAN" DisplayName="CKAN Metadata" />
+    <ItemType Name="AVC" DisplayName="KSP-AVC .version File" />
 
     <FileExtension Name=".asax" ContentType="Asax"/>
     <FileExtension Name=".asmx" ContentType="HTML"/>
@@ -74,5 +81,6 @@
     <FileExtension Name=".licenses" ContentType="Licenses"/>
     <FileExtension Name=".cfg" ContentType="ConfigNode" />
     <FileExtension Name=".ckan" ContentType="CKAN" />
+    <FileExtension Name=".version" ContentType="AVC" />
 </ProjectSchemaDefinitions>
 

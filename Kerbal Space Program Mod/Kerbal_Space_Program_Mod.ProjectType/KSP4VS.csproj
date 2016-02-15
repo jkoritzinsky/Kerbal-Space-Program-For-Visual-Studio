@@ -164,6 +164,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ItemTemplates\AVCFile\AVCFile.csproj">
+      <Project>{51F710A3-2F10-4993-BED1-23BBACA0CAFC}</Project>
+      <Name>AVCFile</Name>
+      <VSIXSubPath>ItemTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
     <ProjectReference Include="..\..\ItemTemplates\CKANFile\CKANFile.csproj">
       <Project>{abd7b3bd-8c21-49db-b0e5-4f0add603ab7}</Project>
       <Name>CKANFile</Name>
@@ -347,6 +354,10 @@
   </ItemGroup>
   <ItemGroup>
     <XamlPropertyRule Include="BuildSystem\Rules\ckan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </XamlPropertyRule>
+    <XamlPropertyRule Include="BuildSystem\Rules\avc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </XamlPropertyRule>

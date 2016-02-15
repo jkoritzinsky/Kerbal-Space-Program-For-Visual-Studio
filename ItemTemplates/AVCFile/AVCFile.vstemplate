@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>KSP-AVC .version File</Name>
+    <Description>Version information file for use with KSP-AVC or MiniAVC</Description>
+    <Icon>AVCFile.ico</Icon>
+    <TemplateID>e1d2fa93-902a-41af-9e6c-7bb3e135a3e0</TemplateID>
+    <ProjectType>Kerbal Space Program Mod</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Version.version</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem TargetFileName="$rootnamespace$.version" ReplaceParameters="true">Version.version</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
