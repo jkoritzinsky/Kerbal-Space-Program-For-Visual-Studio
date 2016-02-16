@@ -32,5 +32,12 @@ namespace KSP4VS.ConfigNode.Tests
         {
             Assert.Contains(ParseAndGetElements("@NODE:HAS[Invalid Name] = value \r\n"), element => element.Name == "MMnamePattern_InvalidChar");
         }
+
+        [Fact]
+        public void NestedHasStatementParses()
+        {
+            var tokens = ParseAndGetElements("@NODE:HAS[@Subnode[]:HAS[~Subproperty[]]] = value");
+            Assert.DoesNotContain(tokens, IsError);
+        }
     }
 }

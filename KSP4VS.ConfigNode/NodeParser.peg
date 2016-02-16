@@ -32,7 +32,7 @@ MMselectWithOp = MMname nameSelector?
 MMselectWithoutOp = name nameSelector
 
 hasOp = [@!#~]
-hasBody = (hasOp MMselectWithoutOp) / MMnamePattern_InvalidChar
+hasBody = (hasOp MMselectWithoutOp hasExpression*) / MMnamePattern_InvalidChar
 hasDeclaration -lexical = "HAS"
 hasExpression = ":" hasDeclaration "[" hasBody "]"
 
