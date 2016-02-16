@@ -7,7 +7,7 @@ using Xunit;
 
 namespace KSP4VS.ConfigNode.Tests
 {
-    public class SimpleModuleManagerTests : TestBase
+    public class ModuleManagerTests : TestBase
     {
         [Fact]
         public void EditWithNameSpecParses()
