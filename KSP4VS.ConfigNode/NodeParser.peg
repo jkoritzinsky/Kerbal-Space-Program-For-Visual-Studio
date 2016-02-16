@@ -40,20 +40,18 @@ flexOrderDeclaration -lexical = "BEFORE" / "FOR" / "AFTER"
 finalOrderDeclaration -lexical = "FINAL"
 orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration nameSelector) / finalOrderDeclaration)
 
-MMvalueSelector = MMselectWithOp
-
 MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers)*
 
-valueName -lexical = (MMvalueSelector / name / name_InvalidChar) name_InvalidChar?
+valueName -lexical = (name / name_InvalidChar) name_InvalidChar?
 nodeName -lexical = (MMnodeSelector / name / name_InvalidChar) name_InvalidChar? 
 
 value =  (bool / numberList / string)
 
-mathOp = [+*%^-]
+mathOp = [+*%^/-]
 
-MMnameOnly = (MMvalueSelector / name_InvalidChar) name_InvalidChar?
+MMvalueName = (MMselectWithOp / name_InvalidChar) name_InvalidChar?
 
-MMnameValuePair -lexical = MMnameOnly _ mathOp eq _ value
+MMnameValuePair -lexical = MMvalueName _ mathOp eq _ value
 
 nameValuePair -lexical = valueName _ eq _ v:("" value?) 
 
