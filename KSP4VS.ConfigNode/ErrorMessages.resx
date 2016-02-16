@@ -120,6 +120,9 @@
   <data name="configNode_noClose" xml:space="preserve">
     <value>Unmatched "{"</value>
   </data>
+  <data name="MMnamePattern_InvalidChar" xml:space="preserve">
+    <value>Invalid charaters in ModuleManager selector</value>
+  </data>
   <data name="nameValuePair_noEq" xml:space="preserve">
     <value>Missing "=" on value entry</value>
   </data>

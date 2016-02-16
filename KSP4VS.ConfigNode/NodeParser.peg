@@ -21,49 +21,40 @@ numberList -lexical ="" (numberListSpace / numberListComma) &newlineOrComment
 
 
 name -lexical =  "" [A-Za-z_]+ 
-name_InvalidChar_warn = &{editorMode} "" name_InvalidChar
 name_InvalidChar -lexical = "" ([^/{} \t\r\n=])+
-name_InvalidChar_error = !{editorMode} "" name_InvalidChar  #ERROR{ErrorMessageMap.MapFromParser()}
 
-topOp = [@+$%!-]
-MMnamePattern = [A-Za-z0-9?*_-]+
-nameSelector = "["MMnamePattern?"]"
+topOp = "" [@+$%!-]
+MMnamePattern = "" [A-Za-z0-9?*_-]+
+MMnamePattern_InvalidChar -lexical = "" [^\]]+
+nameSelector = "[" (MMnamePattern / MMnamePattern_InvalidChar)? "]"
 MMname -lexical = topOp name
 MMselectWithOp = MMname nameSelector?
 MMselectWithoutOp = name nameSelector
 
 hasOp = [@!#~]
-hasBody = hasOp MMselectWithoutOp
+hasBody = (hasOp MMselectWithoutOp) / MMnamePattern_InvalidChar
 hasDeclaration -lexical = "HAS"
 hasExpression = ":" hasDeclaration "[" hasBody "]"
 
 MMselector = (MMselectWithOp / MMselectWithoutOp) hasExpression*
 
-name_all = (MMselector / name / name_InvalidChar_warn / name_InvalidChar_error) (name_InvalidChar_warn / name_InvalidChar_error)?
+name_all = (MMselector / name / name_InvalidChar) name_InvalidChar?
 
 value =  (bool / numberList / string)
 
 
-nameValuePair  -lexical = name_all _ eq _ v:("" value?) 
+nameValuePair -lexical = name_all _ eq _ v:("" value?) 
 
-nameValuePair_noEq_warn  = &{editorMode} n:nameValuePair_noEq 
+nameValuePair_noEq -lexical = _ name_all 
 
-nameValuePair_noEq  -lexical = _ name_all 
-
-nameValuePair_noEq_error  = !{editorMode} nameValuePair_noEq #ERROR{ErrorMessageMap.MapFromParser()}
-
-nameValuePair_all = _ (nameValuePair / nameValuePair_noEq_warn / nameValuePair_noEq_error) newlineOrComment 
+nameValuePair_all = _ (nameValuePair / nameValuePair_noEq) newlineOrComment 
 
 configNodeBody = _ (configNode_all  / nameValuePair_all  / (whitespace / newlineOrComment))* _
 
 configNode  -lexical = _ name_all _ newlineOrComment? _ bro newlineOrComment? _ configNodeBody newlineOrComment? _ brc _ newlineOrComment? 
 
-configNode_noClose_warn  = &{editorMode} c:configNode_noClose 
-
-configNode_noClose_error  = !{editorMode} configNode_noClose #ERROR{ErrorMessageMap.MapFromParser()}
-
 configNode_noClose  -lexical = _ name_all _ newlineOrComment _ bro configNodeBody _ newlineOrComment? 
 
-configNode_all  = configNode / configNode_noClose_warn / configNode_noClose_error
+configNode_all  = configNode / configNode_noClose
 
 nodes  -lexical = configNodeBody 

@@ -7,61 +7,63 @@ using Xunit;
 
 namespace KSP4VS.ConfigNode.Tests
 {
-    public class StandardParseTests
+    public class StandardParseTests : TestBase
     {
         [Fact]
         public void EmptyConfigNodeNoNewlineParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse("PART {}");
+            Assert.DoesNotContain(ParseAndGetElements("PART {}"), IsError);
         }
 
         [Fact]
         public void EmptyConfigNodeWithNewlineParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse("PART\r\n{ }");
+            Assert.DoesNotContain(ParseAndGetElements("PART\r\n{}"), IsError);
         }
 
         [Fact]
         public void ConfigNodeWithValueEntriesParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse(@"
+            Assert.DoesNotContain(ParseAndGetElements(@"
                 NODE
                 {
                 name = value
-                }");
+                }"), IsError);
         }
 
         [Fact]
         public void TopLevelValueEntryParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse("name = value");
+            Assert.DoesNotContain(ParseAndGetElements("name = value"), IsError);
         }
 
         [Fact]
         public void ConfigNodeContainingConfigNodeParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse(@"
+            Assert.DoesNotContain(ParseAndGetElements(@"
                 NODE
                 {
                     SUBNODE
                     {
                         name = value
                     }
-                }");
+                }"), IsError);
+
         }
 
         [Fact]
         public void TwoTopLevelConfigNodesParses()
         {
-            var parser = new NodeParser(false);
-            parser.Parse(@"
+            Assert.DoesNotContain(ParseAndGetElements(@"
                 NODE {}
-                NODE {}");
+                NODE {}"), IsError);
+        }
+
+
+        [Fact]
+        public void NameWithNumberHasErrorToken()
+        {
+            Assert.Contains(ParseAndGetElements("name2 = value\r\n"), (element) => element.Name == "name_InvalidChar");
         }
     }
 }

@@ -70,6 +70,15 @@ namespace KSP4VS.ConfigNode {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid charaters in ModuleManager selector.
+        /// </summary>
+        internal static string MMnamePattern_InvalidChar {
+            get {
+                return ResourceManager.GetString("MMnamePattern_InvalidChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid characters in name.
         /// </summary>
         internal static string name_InvalidChar {

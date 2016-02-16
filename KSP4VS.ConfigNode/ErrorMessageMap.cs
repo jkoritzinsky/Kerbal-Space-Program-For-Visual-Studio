@@ -14,10 +14,5 @@ namespace KSP4VS.ConfigNode
             if (elementName == null) throw new ArgumentException(nameof(elementName));
             return ErrorMessages.ResourceManager.GetString(elementName, ErrorMessages.Culture);
         }
-
-        internal static string MapFromParser([CallerMemberName] string parseFunction = "")
-        {
-            return Map(parseFunction.Remove(parseFunction.Length - "_error".Length));
-        }
     }
 }

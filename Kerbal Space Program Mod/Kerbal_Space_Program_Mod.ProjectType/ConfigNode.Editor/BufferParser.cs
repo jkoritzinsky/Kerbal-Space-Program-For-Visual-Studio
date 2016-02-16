@@ -18,7 +18,7 @@ namespace KSP4VS.ConfigNode.Editor
         public BufferParser(ITextBuffer text)
         {
             Buffer = text;
-            parser = new NodeParser(true);
+            parser = new NodeParser();
             text.Changed += Text_Changed;
             Reparse();
         }

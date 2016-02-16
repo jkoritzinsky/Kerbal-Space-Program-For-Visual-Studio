@@ -8,7 +8,7 @@ using Xunit;
 
 namespace KSP4VS.ConfigNode.Tests
 {
-    public class NodeBuilderTests
+    public class NodeBuilderTests : TestBase
     {
         [Fact]
         public void SimpleConfigNodeBuildTest()
@@ -23,9 +23,7 @@ NODE
     }
 }
 ";
-            var parser = new NodeParser(false);
-            IList<LexicalElement> lexicalElements;
-            parser.Parse(text, null, out lexicalElements);
+            var lexicalElements = ParseAndGetElements(text);
             var builder = new Builder(text, lexicalElements);
             var ast = builder.ast;
             Assert.Equal("nodes", ast.Name);
