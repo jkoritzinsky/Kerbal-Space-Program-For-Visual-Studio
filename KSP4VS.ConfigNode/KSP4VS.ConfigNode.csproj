@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NodeParser.cs" />
     <Compile Include="NodeTree.cs" />
     <Compile Include="TempNodeTree.cs" />
     <Compile Include="Builder.cs" />

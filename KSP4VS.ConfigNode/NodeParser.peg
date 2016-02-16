@@ -36,25 +36,32 @@ hasBody = (hasOp MMselectWithoutOp hasExpression*) / MMnamePattern_InvalidChar
 hasDeclaration -lexical = "HAS"
 hasExpression = ":" hasDeclaration "[" hasBody "]"
 
-MMselector = (MMselectWithOp / MMselectWithoutOp) hasExpression*
+flexOrderDeclaration -lexical = "BEFORE" / "FOR" / "AFTER"
+finalOrderDeclaration -lexical = "FINAL"
+orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration nameSelector) / finalOrderDeclaration)
 
-name_all = (MMselector / name / name_InvalidChar) name_InvalidChar?
+MMvalueSelector = (MMselectWithOp / MMselectWithoutOp)
+
+MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers)*
+
+valueName -lexical = (MMvalueSelector / name / name_InvalidChar) name_InvalidChar?
+nodeName -lexical = (MMnodeSelector / name / name_InvalidChar) name_InvalidChar? 
 
 value =  (bool / numberList / string)
 
 
-nameValuePair -lexical = name_all _ eq _ v:("" value?) 
+nameValuePair -lexical = valueName _ eq _ v:("" value?) 
 
-nameValuePair_noEq -lexical = _ name_all 
+nameValuePair_noEq -lexical = _ valueName 
 
 nameValuePair_all = _ (nameValuePair / nameValuePair_noEq) newlineOrComment 
 
 configNodeBody = _ (configNode_all  / nameValuePair_all  / (whitespace / newlineOrComment))* _
 
-configNode  -lexical = _ name_all _ newlineOrComment? _ bro newlineOrComment? _ configNodeBody newlineOrComment? _ brc _ newlineOrComment? 
+configNode  -lexical = _ nodeName _ newlineOrComment? _ bro newlineOrComment? _ configNodeBody newlineOrComment? _ brc _ newlineOrComment?
 
-configNode_noClose  -lexical = _ name_all _ newlineOrComment _ bro configNodeBody _ newlineOrComment? 
+configNode_noClose  -lexical = _ nodeName _ newlineOrComment _ bro configNodeBody _ newlineOrComment?
 
 configNode_all  = configNode / configNode_noClose
 
-nodes  -lexical = configNodeBody 
+nodes  -lexical = #STATE{state["topLevel"] = new Stack<bool>(); state["topLevel"].Push(true);} configNodeBody 

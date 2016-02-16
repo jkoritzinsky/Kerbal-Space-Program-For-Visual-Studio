@@ -30,13 +30,71 @@ namespace KSP4VS.ConfigNode.Tests
         [Fact]
         public void InvalidHasStatementParsesWithErrorToken()
         {
-            Assert.Contains(ParseAndGetElements("@NODE:HAS[Invalid Name] = value \r\n"), element => element.Name == "MMnamePattern_InvalidChar");
+            Assert.Contains(ParseAndGetElements("@NODE:HAS[Invalid Name] {}"), element => element.Name == "MMnamePattern_InvalidChar");
         }
 
         [Fact]
         public void NestedHasStatementParses()
         {
-            var tokens = ParseAndGetElements("@NODE:HAS[@Subnode[]:HAS[~Subproperty[]]] = value");
+            var tokens = ParseAndGetElements("@NODE:HAS[@Subnode[]:HAS[~Subproperty[]]] {}");
+            Assert.DoesNotContain(tokens, IsError);
+            Assert.NotEqual(1, tokens.Count);
+        }
+
+        [Fact]
+        public void HasFailsToParseOnValue()
+        {
+            var tokens = ParseAndGetElements("@name:HAS[!@Subnode[]] = value\n");
+            Assert.Contains(tokens, token => token.Name == "name_InvalidChar");
+        }
+
+        [Fact]
+        public void MultiNestedHasExampleFromMMWikiParses()
+        {
+            Assert.DoesNotContain(ParseAndGetElements("@PART[*]:HAS[@RESOURCE[MonoPropellant]:HAS[#maxAmount[750]]] {}"), IsError);
+        }
+
+        [Fact]
+        public void BeforeOrderOnTopLevelParses()
+        {
+            Assert.DoesNotContain(ParseAndGetElements("@NODE:BEFORE[Test] {}"), IsError);
+        }
+
+        [Fact]
+        public void AfterOrderOnTopLevelParses()
+        {
+            Assert.DoesNotContain(ParseAndGetElements("@NODE:AFTER[Test] {}"), IsError);
+        }
+
+        [Fact]
+        public void ForOrderOnTopLevelParses()
+        {
+            Assert.DoesNotContain(ParseAndGetElements("@NODE:FOR[Test] {}"), IsError);
+        }
+
+        [Fact]
+        public void FinalOrderOnTopLevelParses()
+        {
+            Assert.DoesNotContain(ParseAndGetElements("@NODE:FINAL {}"), IsError);
+        }
+
+        [Fact]
+        public void OrderingOnNonTopLevelFails()
+        {
+            var tokens = ParseAndGetElements(@"
+                @NODE
+                {
+                    @NODE:BEFORE[Test] {}
+                }");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "name_InvalidChar");           
+        }
+
+        [Fact]
+        public void MultipleOrderingItemsOnTopLevelParses()
+        {
+            var tokens = ParseAndGetElements("@NODE:BEFORE[Mod1]:FOR[Mod2]:AFTER[Mod3] {}");
+            Assert.NotEqual(1, tokens.Count);
             Assert.DoesNotContain(tokens, IsError);
         }
     }
