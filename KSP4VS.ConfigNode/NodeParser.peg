@@ -16,7 +16,7 @@ string -lexical = "" [^\r\n=]+
 bool -lexical = [Tt]"rue" / [Ff]"alse" &newlineOrComment
 number = '-'? [0-9]+ ('.' [0-9]+)?
 numberListComma -lexical = "" (number) ("" _ "," _ number)*
-numberListSpace -lexical ="" (number) ("" whitespace number)*
+numberListSpace -lexical ="" (number !( _ "," _)) ("" whitespace !(",") _ number)*
 numberList -lexical ="" (numberListSpace / numberListComma) &newlineOrComment
 
 
@@ -26,7 +26,7 @@ name_InvalidChar -lexical = "" ([^/{} \t\r\n=])+
 topOp = "" [@+$%!-]
 MMnamePattern = "" [A-Za-z0-9?*_-]+
 MMnamePattern_InvalidChar -lexical = "" [^\]]+
-nameSelector = "[" (MMnamePattern / MMnamePattern_InvalidChar)? "]"
+nameSelector = "[" ((MMnamePattern ("," MMnamePattern)?) / MMnamePattern_InvalidChar)?  "]"
 MMname -lexical = topOp name
 MMselectWithOp = MMname nameSelector?
 MMselectWithoutOp = name nameSelector
@@ -40,7 +40,7 @@ flexOrderDeclaration -lexical = "BEFORE" / "FOR" / "AFTER"
 finalOrderDeclaration -lexical = "FINAL"
 orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration nameSelector) / finalOrderDeclaration)
 
-MMvalueSelector = (MMselectWithOp / MMselectWithoutOp)
+MMvalueSelector = MMselectWithOp
 
 MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers)*
 
@@ -49,12 +49,17 @@ nodeName -lexical = (MMnodeSelector / name / name_InvalidChar) name_InvalidChar?
 
 value =  (bool / numberList / string)
 
+mathOp = [+*%^-]
+
+MMnameOnly = (MMvalueSelector / name_InvalidChar) name_InvalidChar?
+
+MMnameValuePair -lexical = MMnameOnly _ mathOp eq _ value
 
 nameValuePair -lexical = valueName _ eq _ v:("" value?) 
 
 nameValuePair_noEq -lexical = _ valueName 
 
-nameValuePair_all = _ (nameValuePair / nameValuePair_noEq) newlineOrComment 
+nameValuePair_all = _ (MMnameValuePair / nameValuePair / nameValuePair_noEq) newlineOrComment 
 
 configNodeBody = _ (configNode_all  / nameValuePair_all  / (whitespace / newlineOrComment))* _
 

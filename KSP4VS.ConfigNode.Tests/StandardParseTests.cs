@@ -65,5 +65,17 @@ namespace KSP4VS.ConfigNode.Tests
         {
             Assert.Contains(ParseAndGetElements("name2 = value\r\n"), (element) => element.Name == "name_InvalidChar");
         }
+
+        [Fact]
+        public void SpaceSeperatedNumListParsesAsSpaceList()
+        {
+            Assert.Contains(ParseAndGetElements("name = 1 2.5 -3 -4.3\r\n"), element => element.Name == "numberListSpace");
+        }
+
+        [Fact]
+        public void CommaSeperatedNumListParsesAsCommaList()
+        {
+            Assert.Contains(ParseAndGetElements("name = -1,2.5, 3, 4, -5.7\r\n"), element => element.Name == "numberListComma");
+        }
     }
 }
