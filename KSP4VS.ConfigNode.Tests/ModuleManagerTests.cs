@@ -113,5 +113,13 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.DoesNotContain(tokens, IsError);
         }
+
+        [Fact]
+        public void ValueEntryChangeParses()
+        {
+            var tokens = ParseAndGetElements("@name = 2\n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
     }
 }

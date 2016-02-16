@@ -51,7 +51,7 @@ mathOp = [+*%^/-]
 
 MMvalueName = (MMselectWithOp / name_InvalidChar) name_InvalidChar?
 
-MMnameValuePair -lexical = MMvalueName _ mathOp eq _ value
+MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ value
 
 nameValuePair -lexical = valueName _ eq _ v:("" value?) 
 
