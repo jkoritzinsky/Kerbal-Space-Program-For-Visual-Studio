@@ -64,4 +64,4 @@ configNode_noClose  -lexical = _ nodeName _ newlineOrComment _ bro configNodeBod
 
 configNode_all  = configNode / configNode_noClose
 
-nodes  -lexical = #STATE{state["topLevel"] = new Stack<bool>(); state["topLevel"].Push(true);} configNodeBody 
+nodes  -lexical = configNodeBody 
