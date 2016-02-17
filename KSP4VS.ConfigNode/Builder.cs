@@ -20,7 +20,7 @@ namespace KSP4VS.ConfigNode
         {
             var root = orderedTokens.FirstOrDefault();
             if (root == null) return null;
-            var node = new TempNodeTree(text, root);
+            var node = new NodeTree(text, root);
             var subTokens = orderedTokens.Skip(1).TakeWhile(element => element.StartCursor.Location >= root.StartCursor.Location);
             var usedTokens = 1;
             while (subTokens.Any())
@@ -33,7 +33,7 @@ namespace KSP4VS.ConfigNode
                     usedTokens += childNode.Item2;
                 }
             }
-            return new Tuple<NodeTree, int>(new NodeTree(node), usedTokens);
+            return new Tuple<NodeTree, int>(node, usedTokens);
         }
     }
 }

@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="NodeParser.cs" />
     <Compile Include="NodeTree.cs" />
-    <Compile Include="TempNodeTree.cs" />
     <Compile Include="Builder.cs" />
     <Compile Include="ConfigNodeImpl.cs" />
     <Compile Include="ErrorMessages.Designer.cs">
