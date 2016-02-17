@@ -79,7 +79,7 @@ namespace KSP4VS.ConfigNode.Editor
             { "name_InvalidChar", "ConfigNode.name" },
             { "MMname", "ConfigNode.selector" },
             { "hasDeclaration", "ConfigNode.selector" },
-            { "finalOrderDeclaration", "ConfigNode.selector" },
+            { "staticOrderDeclaration", "ConfigNode.selector" },
             { "flexOrderDeclaration", "ConfigNode.selector" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },

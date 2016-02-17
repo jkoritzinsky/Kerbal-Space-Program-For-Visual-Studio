@@ -123,6 +123,22 @@ namespace KSP4VS.ConfigNode.Tests
         }
 
         [Fact]
+        public void OrderedValueEntryChangeParses()
+        {
+            var tokens = ParseAndGetElements("@name,2 = 2\n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void NegativeOrderedValueEntryChangeParses()
+        {
+            var tokens = ParseAndGetElements("@name,-2 = 2\n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
         public void RelativeVariablePathParses()
         {
             var tokens = ParseAndGetElements("@name = #$../../node$ \n");
@@ -161,6 +177,13 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.Contains(tokens, element => element.Name == "variable");
         }
+        [Fact]
+        public void RelativeAndNodeWithOrderedSubNodeVariablePath()
+        {
+            var tokens = ParseAndGetElements("@name = #$../@PART[name]/@MODULE,2[ModuleName]/property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
 
         [Fact]
         public void RelativeAndNodeWithSubNodeVariablePathWithStartSlash()
@@ -190,6 +213,14 @@ namespace KSP4VS.ConfigNode.Tests
         public void SpaceDelimitedVariableSearchParses()
         {
             var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/csv[3, ]$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void OrderedSpaceDelimitedVariableSearchParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/csv,4[3, ]$ \n");
             Assert.NotEqual(1, tokens.Count);
             Assert.Contains(tokens, element => element.Name == "variable");
         }
