@@ -81,6 +81,7 @@ namespace KSP4VS.ConfigNode.Editor
             { "hasDeclaration", "ConfigNode.selector" },
             { "staticOrderDeclaration", "ConfigNode.selector" },
             { "flexOrderDeclaration", "ConfigNode.selector" },
+            { "needsDeclaration", "ConfigNode.selector" },
             { "string", "ConfigNode.value" },
             { "comment", "ConfigNode.comment" },
             { "bool", "ConfigNode.keyword" }

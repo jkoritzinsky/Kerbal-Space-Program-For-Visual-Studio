@@ -37,14 +37,18 @@ hasBody = (hasOp MMselectWithoutOp hasExpression*) / MMnamePattern_InvalidChar
 hasDeclaration -lexical = "HAS"
 hasExpression = ":" hasDeclaration "[" hasBody "]"
 
+needsDeclaration -lexical = "NEEDS"
+needsExpression = ":" needsDeclaration "[" (( "!"? MMnamePattern (("&" / "|" / ",") "!"? MMnamePattern)* ) / MMnamePattern_InvalidChar ) "]"
+
 flexOrderDeclaration -lexical = "BEFORE" / "FOR" / "AFTER"
 staticOrderDeclaration -lexical = "FINAL" / "FIRST"
-orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration nameSelector) / staticOrderDeclaration)
+orderSelector = "[" ((MMnamePattern ("," MMnamePattern)*) / MMnamePattern_InvalidChar)?  "]"
+orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration orderSelector) / staticOrderDeclaration)
 
-MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers)*
+MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers/needsExpression)*
 
-valueName -lexical = (name / name_InvalidChar) name_InvalidChar?
-nodeName -lexical = (MMnodeSelector / name / name_InvalidChar) name_InvalidChar? 
+valueName -lexical = ((name needsExpression*) / name_InvalidChar) name_InvalidChar?
+nodeName -lexical = (MMnodeSelector / (name needsExpression*) / name_InvalidChar) name_InvalidChar? 
 
 value =  bool / numberList / string
 variable -lexical = "#$" ("/"? (("@" name ordering? nameSelector?) / "..") ("/"(("@" name ordering? nameSelector?) / ".."))* "/")? name ordering? ("[" [0-9]+ ("," .)? "]")? "$" 
@@ -54,7 +58,7 @@ MMvalue = variableList / bool / numberList / string
 
 mathOp = [+*%^/-]
 
-MMvalueName = !name (MMselectWithOp / name_InvalidChar) name_InvalidChar?
+MMvalueName = !name ((MMselectWithOp needsExpression*) / name_InvalidChar) name_InvalidChar?
 
 MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ MMvalue
 

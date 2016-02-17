@@ -232,5 +232,45 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.Contains(tokens, element => element.Name == "variable");
         }
+
+        [Fact]
+        public void NeedsOnModuleManagerNodeParses()
+        {
+            var tokens = ParseAndGetElements("@NODE:NEEDS[Mod1] {}");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void NeedsOnNodeParses()
+        {
+            var tokens = ParseAndGetElements("NODE:NEEDS[Mod1] {}");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void NeedsOnValueParses()
+        {
+            var tokens = ParseAndGetElements("name:NEEDS[Mod1] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void NeedsOnModuleManagerValueParses()
+        {
+            var tokens = ParseAndGetElements("@name:NEEDS[Mod1] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void NeedsOnModuleManagerValueWithOperatorsParses()
+        {
+            var tokens = ParseAndGetElements("@name:NEEDS[Mod1,!Mod2&Mod3|Mod4] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
     }
 }
