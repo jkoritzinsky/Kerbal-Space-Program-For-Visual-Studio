@@ -14,7 +14,7 @@ newlineOrComment = "" _ (newline / comment)+
 
 string -lexical = "" [^\r\n=]+
 bool -lexical = [Tt]"rue" / [Ff]"alse" &newlineOrComment
-number = '-'? [0-9]+ ('.' [0-9]+)?
+number -lexical = '-'? [0-9]+ ('.' [0-9]+)?
 numberListComma -lexical = "" (number) ("" _ "," _ number)*
 numberListSpace -lexical ="" (number !( _ "," _)) ("" whitespace !(",") _ number)*
 numberList -lexical ="" (numberListSpace / numberListComma) &newlineOrComment
@@ -45,13 +45,17 @@ MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecif
 valueName -lexical = (name / name_InvalidChar) name_InvalidChar?
 nodeName -lexical = (MMnodeSelector / name / name_InvalidChar) name_InvalidChar? 
 
-value =  (bool / numberList / string)
+value =  bool / numberList / string
+variable -lexical = "#$" ("/"? (("@" name nameSelector?) / "..") ("/"(("@" name nameSelector?) / ".."))* "/")? name ("[" [0-9]+ ("," .)? "]")? "$" 
+variableList -lexical = variable (_ variable)* &newlineOrComment
+
+MMvalue = variableList / bool / numberList / string
 
 mathOp = [+*%^/-]
 
-MMvalueName = (MMselectWithOp / name_InvalidChar) name_InvalidChar?
+MMvalueName = !name (MMselectWithOp / name_InvalidChar) name_InvalidChar?
 
-MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ value
+MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ MMvalue
 
 nameValuePair -lexical = valueName _ eq _ v:("" value?) 
 

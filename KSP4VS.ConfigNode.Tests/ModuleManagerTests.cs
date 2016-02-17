@@ -121,5 +121,85 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.DoesNotContain(tokens, IsError);
         }
+
+        [Fact]
+        public void RelativeVariablePathParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$../../node$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void TopLevelNodeVariablePath()
+        {
+            var tokens = ParseAndGetElements("@name = #$@PART[name]/property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void SameLevelValuePath()
+        {
+            var tokens = ParseAndGetElements("@name = #$property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void TopLevelNodeWithSubNodeVariablePath()
+        {
+            var tokens = ParseAndGetElements("@name = #$@PART[name]/@MODULE[ModuleName]/property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void RelativeAndNodeWithSubNodeVariablePath()
+        {
+            var tokens = ParseAndGetElements("@name = #$../@PART[name]/@MODULE[ModuleName]/property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void RelativeAndNodeWithSubNodeVariablePathWithStartSlash()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void VariableListParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/property$ #$property$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void CommaDelimitedVariableSearchParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/csv[3]$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void SpaceDelimitedVariableSearchParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/csv[3, ]$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
+
+        [Fact]
+        public void CloseBracketDelimitedVariableSearchParses()
+        {
+            var tokens = ParseAndGetElements("@name = #$/@MODULE[name]/@SUBNode[ModuleName]/csv[3,]]$ \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.Contains(tokens, element => element.Name == "variable");
+        }
     }
 }
