@@ -129,4 +129,13 @@
   <data name="name_InvalidChar" xml:space="preserve">
     <value>Invalid characters in name</value>
   </data>
+  <data name="CN001" xml:space="preserve">
+    <value>Can only have one of the following: BEFORE, AFTER, FIRST, or FINAL.</value>
+  </data>
+  <data name="CN002" xml:space="preserve">
+    <value>Can only have one FOR declaration.</value>
+  </data>
+  <data name="CN003" xml:space="preserve">
+    <value>Can only have BEFORE, AFTER, FIRST, FINAL, or FOR on a top level node.</value>
+  </data>
 </root>

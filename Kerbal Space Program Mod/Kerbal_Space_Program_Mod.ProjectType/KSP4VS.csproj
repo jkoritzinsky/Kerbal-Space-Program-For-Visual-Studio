@@ -269,6 +269,9 @@
     <Compile Include="ConfigNode.Editor\Classifier.cs" />
     <Compile Include="ConfigNode.Editor\ClassifierProvider.cs" />
     <Compile Include="ConfigNode.Editor\ContentType.cs" />
+    <Compile Include="ConfigNode.Editor\SemanticErrorTagger.cs" />
+    <Compile Include="ConfigNode.Editor\SemanticErrorTaggerProvider.cs" />
+    <Compile Include="ConfigNode.Editor\SnapshotSpanExtensions.cs" />
     <Compile Include="ConfigNode.Editor\TextBuffer.cs" />
     <Compile Include="ConfigNode.Editor\OutliningTagger.cs" />
     <Compile Include="ConfigNode.Editor\OutliningTaggerProvider.cs" />

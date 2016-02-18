@@ -43,7 +43,7 @@ needsExpression = ":" needsDeclaration "[" (( "!"? MMnamePattern (("&" / "|" / "
 flexOrderDeclaration -lexical = "BEFORE" / "FOR" / "AFTER"
 staticOrderDeclaration -lexical = "FINAL" / "FIRST"
 orderSelector = "[" ((MMnamePattern ("," MMnamePattern)*) / MMnamePattern_InvalidChar)?  "]"
-orderSpecifiers = &{IsTopLevelNode(state)} ":" ((flexOrderDeclaration orderSelector) / staticOrderDeclaration)
+orderSpecifiers = ":" ((flexOrderDeclaration orderSelector) / staticOrderDeclaration)
 
 MMnodeSelector = (MMselectWithOp / MMselectWithoutOp) (hasExpression/orderSpecifiers/needsExpression)*
 

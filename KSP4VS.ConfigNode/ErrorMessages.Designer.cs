@@ -61,6 +61,33 @@ namespace KSP4VS.ConfigNode {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can only have one of the following: BEFORE, AFTER, FIRST, or FINAL..
+        /// </summary>
+        internal static string CN001 {
+            get {
+                return ResourceManager.GetString("CN001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can only have one FOR declaration..
+        /// </summary>
+        internal static string CN002 {
+            get {
+                return ResourceManager.GetString("CN002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can only have BEFORE, AFTER, FIRST, FINAL, or FOR on a top level node..
+        /// </summary>
+        internal static string CN003 {
+            get {
+                return ResourceManager.GetString("CN003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unmatched &quot;{&quot;.
         /// </summary>
         internal static string configNode_noClose {

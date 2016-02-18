@@ -63,39 +63,10 @@ namespace KSP4VS.ConfigNode.Editor
                 var errorSpan = new Span(startIndex, endIndex - startIndex);
                 if (errorSpan.IntersectsWith(span))
                 {
-                    var errorSnapshotSpan = EnsureOnlyOneLine(TrimWhitespace(new SnapshotSpan(span.Snapshot, errorSpan)));
+                    var errorSnapshotSpan = new SnapshotSpan(span.Snapshot, errorSpan).TrimWhitespace().EnsureOnlyOneLine();
                     yield return new TagSpan<ErrorTag>(errorSnapshotSpan, new ErrorTag(PredefinedErrorTypeNames.SyntaxError, ErrorMessageMap.Map(element.Name)));
                 }
             }
-        }
-
-        private SnapshotSpan EnsureOnlyOneLine(SnapshotSpan snapshotSpan)
-        {
-            var snapshotLines = snapshotSpan.GetText().Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            if (snapshotLines.Length == 0)
-            {
-                return snapshotSpan;
-            }
-            return new SnapshotSpan(snapshotSpan.Snapshot, snapshotSpan.Start, snapshotLines[0].Length);
-        }
-
-        private SnapshotSpan TrimWhitespace(SnapshotSpan snapshotSpan)
-        {
-            var textInSnapshot = snapshotSpan.GetText();
-            var frontTrimmed = snapshotSpan.GetText().TrimStart();
-            var startOffset = 0;
-            if (frontTrimmed.Length < textInSnapshot.Length)
-            {
-                startOffset = textInSnapshot.Length - frontTrimmed.Length;
-            }
-            var endOffset = 0;
-            var backTrimmed = snapshotSpan.GetText().TrimEnd();
-            if (backTrimmed.Length < textInSnapshot.Length)
-            {
-                endOffset = textInSnapshot.Length - backTrimmed.Length;
-            }
-            var length = snapshotSpan.Length - startOffset - endOffset;
-            return new SnapshotSpan(snapshotSpan.Snapshot, new Span(snapshotSpan.Start + startOffset, length >= 0 ? length : 0));
         }
     }
 }

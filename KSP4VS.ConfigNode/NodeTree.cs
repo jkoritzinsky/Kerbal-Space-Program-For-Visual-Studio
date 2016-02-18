@@ -8,13 +8,14 @@ using System.Diagnostics;
 namespace KSP4VS.ConfigNode
 {
 
-    [DebuggerDisplay("{Name}:{Text} @{Start}->{End}")]
+    [DebuggerDisplay("{Name} @{Start.Position}->{End.Position}:{Text}")]
     public class NodeTree
     {
+        public NodeTree Parent { get; private set; }
         private readonly LinkedList<NodeTree> subNodes = new LinkedList<NodeTree>();
         public string Name => element.Name;
-        public int Start => element.StartCursor.Location;
-        public int End => element.EndCursor.Location;
+        public Cursor Start => element.StartCursor;
+        public Cursor End => element.EndCursor;
         public string Text { get; }
         private LexicalElement element;
 
@@ -27,6 +28,7 @@ namespace KSP4VS.ConfigNode
         internal void Add(NodeTree childNode)
         {
             subNodes.AddFirst(childNode);
+            childNode.Parent = this;
         }
 
         public IEnumerable<NodeTree> this[string node]
