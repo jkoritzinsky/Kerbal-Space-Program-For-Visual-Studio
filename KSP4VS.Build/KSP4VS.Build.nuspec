@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.8">
+        <id>KSP4VS.Build</id>
+        <title>Kerbal Space Program for Visual Studio Build Tooling</title>
+        <version>1.0.0-alpha1</version>
+        <authors>Jeremy Koritzinsky</authors>
+        <owners>Jeremy Koritzinsky</owners>
+        <projectUrl>http://github.com/jkoritzinsky/Kerbal-Space-Program-for-Visual-Studio</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Build tooling for Kerbal Space Program for Visual Studio</description>
+        <tags>KSP4VS,CPS,Build</tags>
+        <developmentDependency>true</developmentDependency>
+    </metadata>
+    <files>
+        <file src="bin/Release/**" target="build" />
+        <file src="README.txt" target="content" />
+    </files>
+</package>

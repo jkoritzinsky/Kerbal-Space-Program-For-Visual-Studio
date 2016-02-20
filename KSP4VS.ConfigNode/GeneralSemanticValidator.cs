@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KSP4VS.ConfigNode
 {
-    public class GeneralSemanticValidator : SemanticValidator
+    public class GeneralSemanticValidator : Validator
     {
         private const string Category = "General";
-        public override IEnumerable<SemanticWarning> Validate(string fileName, NodeTree tree)
+        public override IEnumerable<Warning> Validate(string fileName, NodeTree tree)
         {
             var nodeNames = tree.DecendantNodesWithName("nodeName");
             foreach (var name in nodeNames)
@@ -31,20 +31,20 @@ namespace KSP4VS.ConfigNode
                         {
                             if (parent.Name == "configNode")
                             {
-                                yield return new SemanticWarning(fileName, name.Start, name.End, Category, "CN003");
+                                yield return new Warning(fileName, name.Start, name.End, Category, "CN003");
                                 break;
                             }
                         }
                     }
                 }
                 if (flexDeclarations.Any(decl => decl.Text != "FOR") && staticDeclaration.Any())
-                    yield return new SemanticWarning(fileName, name.Start, name.End, Category, "CN001");
+                    yield return new Warning(fileName, name.Start, name.End, Category, "CN001");
                 if (flexDeclarations.Count(decl => decl.Text == "FOR") > 1)
-                    yield return new SemanticWarning(fileName, name.Start, name.End, Category, "CN002");
+                    yield return new Warning(fileName, name.Start, name.End, Category, "CN002");
                 if (staticDeclaration.Count() > 1)
-                    yield return new SemanticWarning(fileName, name.Start, name.End, Category, "CN001");
+                    yield return new Warning(fileName, name.Start, name.End, Category, "CN001");
                 if (flexDeclarations.Where(decl => decl.Text != "FOR").GroupBy(decl => decl.Text).Count() > 1)
-                    yield return new SemanticWarning(fileName, name.Start, name.End, Category, "CN001");
+                    yield return new Warning(fileName, name.Start, name.End, Category, "CN001");
             }
         }
     }

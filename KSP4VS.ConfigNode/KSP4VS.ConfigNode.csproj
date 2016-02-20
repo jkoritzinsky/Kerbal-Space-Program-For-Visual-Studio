@@ -67,8 +67,8 @@
     </Compile>
     <Compile Include="ErrorMessageMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SemanticValidator.cs" />
-    <Compile Include="SemanticWarning.cs" />
+    <Compile Include="Validator.cs" />
+    <Compile Include="Warning.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace KSP4VS.ConfigNode
 {
-    public abstract class SemanticValidator
+    public abstract class Validator
     {
-        public abstract IEnumerable<SemanticWarning> Validate(string fileName, NodeTree tree);
+        public abstract IEnumerable<Warning> Validate(string fileName, NodeTree tree);
     }
 }

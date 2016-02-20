@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KSP4VS.ConfigNode
 {
-    public struct SemanticWarning
+    public struct Warning
     {
         public Cursor Start { get; }
         public Cursor End { get; }
@@ -15,7 +15,7 @@ namespace KSP4VS.ConfigNode
         public string WarningCode { get; }
         public string Message { get; }
         public string File { get; }
-        public SemanticWarning(string file, Cursor start, Cursor end, string subcategory, string warningCode, string message = null)
+        public Warning(string file, Cursor start, Cursor end, string subcategory, string warningCode, string message = null)
             : this()
         {
             Start = start;

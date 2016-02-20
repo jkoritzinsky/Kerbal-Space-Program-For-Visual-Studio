@@ -35,6 +35,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpClass", "ItemTemplate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpInterface", "ItemTemplates\CSharpInterface\CSharpInterface.csproj", "{0518CB84-DB88-4A21-BE6C-F56E95F58A8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP4VS.Build", "KSP4VS.Build\KSP4VS.Build.csproj", "{A207FFFE-EC0D-4A00-A218-785078B80127}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DBAE231-2B49-4AFE-8011-3C7286CF51FC}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +104,10 @@ Global
 		{0518CB84-DB88-4A21-BE6C-F56E95F58A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0518CB84-DB88-4A21-BE6C-F56E95F58A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0518CB84-DB88-4A21-BE6C-F56E95F58A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A207FFFE-EC0D-4A00-A218-785078B80127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A207FFFE-EC0D-4A00-A218-785078B80127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A207FFFE-EC0D-4A00-A218-785078B80127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A207FFFE-EC0D-4A00-A218-785078B80127}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

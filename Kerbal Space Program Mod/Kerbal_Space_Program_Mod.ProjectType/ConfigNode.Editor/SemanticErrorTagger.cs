@@ -13,7 +13,7 @@ namespace KSP4VS.ConfigNode.Editor
     {
         private readonly BufferParser parser;
 
-        private List<SemanticValidator> validators = new List<SemanticValidator>();
+        private List<Validator> validators = new List<Validator>();
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
