@@ -19,7 +19,7 @@ namespace KSP4VS.Deploy
     // TODO: If your implementation is async, consider using IAsyncCommandGroupHandler instead of ICommandGroupHandler
     [ExportCommandGroup("f61a30ca-328c-4a2c-b394-f5f4a5eefcd4")]
     [AppliesTo(MyUnconfiguredProject.UniqueCapability)]
-    internal class DeployCommandGroupHandler : IAsyncCommandGroupHandler
+    internal class CommandGroupHandler : IAsyncCommandGroupHandler
     {
         private UnconfiguredProject project;
         private IThreadHandling threadHandler;
@@ -27,14 +27,21 @@ namespace KSP4VS.Deploy
         private IVsUIShell uiShell;
         private IVsRunningDocumentTable docTable;
 
+        [ImportMany(ExportContractNames.VsTypes.IVsProject, typeof(IVsProject))]
+        internal OrderPrecedenceImportCollection<IVsHierarchy> ProjectHierarchies { get; }
+
+        internal IVsHierarchy ProjectHierarchy => ProjectHierarchies.Single().Value;
+
         [ImportingConstructor]
-        private DeployCommandGroupHandler(UnconfiguredProject project, IThreadHandling threadHandler, [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider)
+        private CommandGroupHandler(UnconfiguredProject project, IThreadHandling threadHandler, [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider)
         {
             this.threadHandler = threadHandler;
             threadHandler.VerifyOnUIThread();
             this.project = project;
             uiShell = (IVsUIShell)serviceProvider.GetService(typeof(IVsUIShell));
             docTable = (IVsRunningDocumentTable)serviceProvider.GetService(typeof(IVsRunningDocumentTable));
+
+            ProjectHierarchies = new OrderPrecedenceImportCollection<IVsHierarchy>(projectCapabilityCheckProvider: project);
         }
 
         /// <summary>
@@ -74,29 +81,108 @@ namespace KSP4VS.Deploy
         {
             await threadHandler.SwitchToUIThread();
             var result = false;
-            var windowFrame = await FindOrCreateWindowFrameAsync(project);
+            var windowFrame = await FindOrCreateWindowFrameForProjectAsync();
             windowFrame.Show();
             return result;
         }
 
-        private async Task<IVsWindowFrame> FindOrCreateWindowFrameAsync(UnconfiguredProject project)
+
+        // Window creation code below adapted from the NuGet project, licensed to the .NET Foundation
+
+        private async Task<IVsWindowFrame> FindOrCreateWindowFrameForProjectAsync()
         {
-            var frame = FindExistingWindowFrame(project);
+            var frame = FindExistingWindowFrame();
             if (frame == null)
             {
-                frame = await CreateWindowFrameAsync(project);
+                frame = await CreateWindowFrameAsync();
             }
             return frame;
         }
 
-        private Task<IVsWindowFrame> CreateWindowFrameAsync(UnconfiguredProject project)
+        private async Task<IVsWindowFrame> CreateWindowFrameAsync()
         {
-            throw new NotImplementedException();
+            var documentName = project.FullPath;
+            var docData = IntPtr.Zero;
+            var hr = 0;
+            uint itemId;
+            IVsHierarchy hierarchy;
+            try
+            {
+                uint cookie;
+                hr = docTable.FindAndLockDocument((uint)_VSRDTFLAGS.RDT_NoLock,
+                        documentName, out hierarchy, out itemId, out docData, out cookie);
+                if (hr != VSConstants.S_OK)
+                {
+                    //No registered document window.
+                    hierarchy = ProjectHierarchy;
+                    itemId = (uint)VSConstants.VSITEMID.Root;
+                }
+            }
+            finally
+            {
+                if (docData != IntPtr.Zero)
+                {
+                    Marshal.Release(docData);
+                    docData = IntPtr.Zero;
+                }
+            }
+            return await CreateDocWindowAsync(project, documentName, hierarchy, itemId);
         }
 
-        private IVsWindowFrame FindExistingWindowFrame(UnconfiguredProject project)
+        private async Task<IVsWindowFrame> CreateDocWindowAsync(UnconfiguredProject unconfiguredProject, string documentName, IVsHierarchy hierarchy, uint itemId)
         {
-            throw new NotImplementedException();
+            var windowFlags = _VSRDTFLAGS.RDT_DontAddToMRU | _VSRDTFLAGS.RDT_DontAutoOpen;
+            var model = new WindowModel(project);
+            await model.LoadFromProject();
+            var control = new Control(model);
+            var windowPane = new WindowPane(control);
+            var editorType = Guid.Empty;
+            var commandUI = Guid.Empty;
+            var caption = $"{model.Name} Deploy Rules";
+            IVsWindowFrame frame;
+            var docView = IntPtr.Zero;
+            var docData = IntPtr.Zero;
+            var hr = 0;
+
+            try
+            {
+                docView = Marshal.GetIUnknownForObject(windowPane);
+                docData = Marshal.GetIUnknownForObject(model);
+                hr = uiShell.CreateDocumentWindow((uint)windowFlags, documentName, (IVsUIHierarchy)hierarchy, itemId,
+                    docView, docData, ref editorType, null, ref commandUI, null, caption, string.Empty, null, out frame);
+            }
+            finally
+            {
+                if (docView != IntPtr.Zero)
+                {
+                    Marshal.Release(docView);
+                }
+                if (docData != IntPtr.Zero)
+                {
+                    Marshal.Release(docData);
+                }
+            }
+            ErrorHandler.ThrowOnFailure(hr);
+            return frame;
+        }
+
+        private IVsWindowFrame FindExistingWindowFrame()
+        {
+            foreach (var frame in VsUtility.GetDocumentWindows(uiShell))
+            {
+                object docView;
+                var hr = frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out docView);
+                if (hr == VSConstants.S_OK && docView is WindowPane)
+                {
+                    var pane = docView as WindowPane;
+                    var model = (pane.Content as Control).Model;
+                    if (model.Name == System.IO.Path.GetFileNameWithoutExtension(project.FullPath))
+                    {
+                        return frame;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

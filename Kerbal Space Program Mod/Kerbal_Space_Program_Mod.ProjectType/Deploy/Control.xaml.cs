@@ -6,6 +6,7 @@
 
 namespace KSP4VS.Deploy
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
@@ -13,21 +14,23 @@ namespace KSP4VS.Deploy
     /// <summary>
     /// Interaction logic for DeployConfigurationWindowControl.
     /// </summary>
-    public partial class DeployConfigurationWindowControl : UserControl
+    public partial class Control : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeployConfigurationWindowControl"/> class.
+        /// Initializes a new instance of the <see cref="Control"/> class.
         /// </summary>
-        private DeployConfigurationWindowControl()
+        private Control()
         {
             this.InitializeComponent();
         }
 
-        internal DeployConfigurationWindowControl(DeployWindowModel model)
+        internal Control(WindowModel model)
             :this()
         {
             DataContext = model;
         }
+
+        internal WindowModel Model => (WindowModel)DataContext;
 
         /// <summary>
         /// Handles click on the button by displaying a message box.

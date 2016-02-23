@@ -327,13 +327,14 @@
     <Compile Include="ConfigNode.Editor\OutliningTaggerProvider.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTagger.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTaggerProvider.cs" />
-    <Compile Include="Deploy\DeployCommandGroupHandler.cs" />
-    <Compile Include="Deploy\DeployConfigurationWindowControl.xaml.cs">
-      <DependentUpon>DeployConfigurationWindowControl.xaml</DependentUpon>
+    <Compile Include="Deploy\CommandGroupHandler.cs" />
+    <Compile Include="Deploy\Control.xaml.cs">
+      <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Deploy\DeployProvider.cs" />
-    <Compile Include="Deploy\DeployWindowModel.cs" />
-    <Compile Include="Deploy\DeployWindowPane.cs" />
+    <Compile Include="Deploy\WindowModel.cs" />
+    <Compile Include="Deploy\WindowPane.cs" />
+    <Compile Include="Deploy\VsUtility.cs" />
     <Compile Include="MyConfiguredProject.cs" />
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
@@ -427,7 +428,7 @@
     </XamlPropertyRule>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Deploy\DeployConfigurationWindowControl.xaml">
+    <Page Include="Deploy\Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
