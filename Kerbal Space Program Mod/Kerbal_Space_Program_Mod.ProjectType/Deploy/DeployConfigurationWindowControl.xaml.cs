@@ -18,9 +18,15 @@ namespace KSP4VS.Deploy
         /// <summary>
         /// Initializes a new instance of the <see cref="DeployConfigurationWindowControl"/> class.
         /// </summary>
-        public DeployConfigurationWindowControl()
+        private DeployConfigurationWindowControl()
         {
             this.InitializeComponent();
+        }
+
+        internal DeployConfigurationWindowControl(DeployWindowModel model)
+            :this()
+        {
+            DataContext = model;
         }
 
         /// <summary>
