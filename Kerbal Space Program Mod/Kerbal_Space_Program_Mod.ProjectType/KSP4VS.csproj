@@ -328,7 +328,6 @@
     <Compile Include="ConfigNode.Editor\SyntaxErrorTagger.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTaggerProvider.cs" />
     <Compile Include="Deploy\DeployCommandGroupHandler.cs" />
-    <Compile Include="Deploy\DeployConfigurationWindow.cs" />
     <Compile Include="Deploy\DeployConfigurationWindowControl.xaml.cs">
       <DependentUpon>DeployConfigurationWindowControl.xaml</DependentUpon>
     </Compile>

@@ -28,7 +28,6 @@ namespace KSP4VS
     [Description("A project system for creating mods for Kerbal Space Program")]
     [Guid(PackageGuid)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideToolWindow(typeof(KSP4VS.Deploy.DeployConfigurationWindow))]
     public sealed class VsPackage : Package
     {
         /// <summary>
@@ -52,15 +51,5 @@ namespace KSP4VS
         /// resource names can be calculated for embedded resources.
         /// </summary>
         internal const string DefaultNamespace = nameof(KSP4VS);
-
-        /// <summary>
-        /// Initialization of the package; this method is called right after the package is sited, so this is the place
-        /// where you can put all the initialization code that rely on services provided by VisualStudio.
-        /// </summary>
-        protected override void Initialize()
-        {
-            base.Initialize();
-            KSP4VS.Deploy.DeployConfigurationWindowCommand.Initialize(this);
-        }
     }
 }
