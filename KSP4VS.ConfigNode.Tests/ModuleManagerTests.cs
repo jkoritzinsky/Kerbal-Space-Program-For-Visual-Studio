@@ -79,18 +79,6 @@ namespace KSP4VS.ConfigNode.Tests
         }
 
         [Fact]
-        public void OrderingOnNonTopLevelFails()
-        {
-            var tokens = ParseAndGetElements(@"
-                @NODE
-                {
-                    @NODE:BEFORE[Test] {}
-                }");
-            Assert.NotEqual(1, tokens.Count);
-            Assert.Contains(tokens, element => element.Name == "name_InvalidChar");           
-        }
-
-        [Fact]
         public void MultipleOrderingItemsOnTopLevelParses()
         {
             var tokens = ParseAndGetElements("@NODE:BEFORE[Mod1]:FOR[Mod2]:AFTER[Mod3] {}");
