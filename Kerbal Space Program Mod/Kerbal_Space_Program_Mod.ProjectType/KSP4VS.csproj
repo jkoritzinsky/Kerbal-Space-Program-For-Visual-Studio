@@ -332,6 +332,10 @@
       <DependentUpon>Control.xaml</DependentUpon>
     </Compile>
     <Compile Include="Deploy\DeployProvider.cs" />
+    <Compile Include="Deploy\IDeployTarget.cs" />
+    <Compile Include="Deploy\IDeployTargetUI.cs" />
+    <Compile Include="Deploy\Targets\GitHub\GitHubDeploy.cs" />
+    <Compile Include="Deploy\Targets\GitHub\GitHubDeployUI.cs" />
     <Compile Include="Deploy\WindowModel.cs" />
     <Compile Include="Deploy\WindowPane.cs" />
     <Compile Include="Deploy\VsUtility.cs" />

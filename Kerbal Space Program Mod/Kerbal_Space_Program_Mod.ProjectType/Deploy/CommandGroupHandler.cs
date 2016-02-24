@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace KSP4VS.Deploy
 {
@@ -21,6 +22,8 @@ namespace KSP4VS.Deploy
     [AppliesTo(MyUnconfiguredProject.UniqueCapability)]
     internal class CommandGroupHandler : IAsyncCommandGroupHandler
     {
+        private readonly IEnumerable<IDeployTargetUI> targetUIs;
+        private readonly IProjectLockService lockService;
         private UnconfiguredProject project;
         private IThreadHandling threadHandler;
 
@@ -33,7 +36,8 @@ namespace KSP4VS.Deploy
         internal IVsHierarchy ProjectHierarchy => ProjectHierarchies.Single().Value;
 
         [ImportingConstructor]
-        private CommandGroupHandler(UnconfiguredProject project, IThreadHandling threadHandler, [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider)
+        private CommandGroupHandler(UnconfiguredProject project, IThreadHandling threadHandler, IProjectLockService lockService, 
+            [ImportMany] IEnumerable<IDeployTargetUI> targetUIs, [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider)
         {
             this.threadHandler = threadHandler;
             threadHandler.VerifyOnUIThread();
@@ -42,6 +46,8 @@ namespace KSP4VS.Deploy
             docTable = (IVsRunningDocumentTable)serviceProvider.GetService(typeof(IVsRunningDocumentTable));
 
             ProjectHierarchies = new OrderPrecedenceImportCollection<IVsHierarchy>(projectCapabilityCheckProvider: project);
+            this.lockService = lockService;
+            this.targetUIs = targetUIs;
         }
 
         /// <summary>
@@ -132,7 +138,7 @@ namespace KSP4VS.Deploy
         private async Task<IVsWindowFrame> CreateDocWindowAsync(UnconfiguredProject unconfiguredProject, string documentName, IVsHierarchy hierarchy, uint itemId)
         {
             var windowFlags = _VSRDTFLAGS.RDT_DontAddToMRU | _VSRDTFLAGS.RDT_DontAutoOpen;
-            var model = new WindowModel(project);
+            var model = new WindowModel(project, targetUIs, lockService, threadHandler);
             await model.LoadFromProject();
             var control = new Control(model);
             var windowPane = new WindowPane(control);
