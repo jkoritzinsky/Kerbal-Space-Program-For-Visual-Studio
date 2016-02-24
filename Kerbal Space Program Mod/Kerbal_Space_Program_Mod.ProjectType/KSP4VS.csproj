@@ -336,6 +336,9 @@
     <Compile Include="Deploy\IDeployTargetUI.cs" />
     <Compile Include="Deploy\Targets\GitHub\GitHubDeploy.cs" />
     <Compile Include="Deploy\Targets\GitHub\GitHubDeployUI.cs" />
+    <Compile Include="Deploy\Targets\GitHub\GitHubProject.xaml.cs">
+      <DependentUpon>GitHubProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Deploy\WindowModel.cs" />
     <Compile Include="Deploy\WindowPane.cs" />
     <Compile Include="Deploy\VsUtility.cs" />
@@ -433,6 +436,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Deploy\Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Deploy\Targets\GitHub\GitHubProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

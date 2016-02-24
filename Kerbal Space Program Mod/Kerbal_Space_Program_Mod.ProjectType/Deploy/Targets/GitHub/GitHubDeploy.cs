@@ -26,8 +26,22 @@ namespace KSP4VS.Deploy.Targets.GitHub
         
         public string TargetName => nameof(GitHub);
 
-        public string Branch { get; set; }
-        public string VersionNamePattern { get; set; }
+        private string branch;
+
+        public string Branch
+        {
+            get { return branch; }
+            set { branch = value; NotifyPropertyChanged(); }
+        }
+
+        private string versionNamePattern;
+
+        public string VersionNamePattern
+        {
+            get { return versionNamePattern; }
+            set { versionNamePattern = value;NotifyPropertyChanged(); }
+        }
+
 
         [ImportingConstructor]
         public GitHubDeploy(UnconfiguredProject project, IProjectLockService projectLockService, IThreadHandling threadHandler)
@@ -54,6 +68,7 @@ namespace KSP4VS.Deploy.Targets.GitHub
                     var msBuildProject = await writeLock.GetProjectAsync(await project.GetSuggestedConfiguredProjectAsync());
                     msBuildProject.SetProperty(nameof(GitHub) + nameof(Branch), Branch);
                     msBuildProject.SetProperty(nameof(VersionNamePattern), VersionNamePattern);
+                    msBuildProject.Save();
                 }
             });
         }
@@ -70,8 +85,8 @@ namespace KSP4VS.Deploy.Targets.GitHub
                 using (var readLock = await projectLockService.ReadLockAsync())
                 {
                     var msBuildProject = await readLock.GetProjectAsync(await project.GetSuggestedConfiguredProjectAsync());
-                    Branch = msBuildProject.GetPropertyValue(nameof(Branch));
-                    VersionNamePattern = msBuildProject.GetPropertyValue(nameof(VersionNamePattern));
+                    Branch = msBuildProject.GetProperty(nameof(Branch))?.UnevaluatedValue ?? "master";
+                    VersionNamePattern = msBuildProject.GetProperty(nameof(VersionNamePattern))?.UnevaluatedValue ?? "$(MajorVersion).$(MinorVersion)";
                 }
             });
         }

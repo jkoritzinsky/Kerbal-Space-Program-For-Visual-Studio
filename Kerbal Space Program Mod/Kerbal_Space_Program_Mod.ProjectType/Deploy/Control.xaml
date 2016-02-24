@@ -11,8 +11,14 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Label Content="Current Deployment Target:" />
-            <ComboBox Name="TargetPicker" ItemsSource="{Binding TargetUIs}" />
+            <ComboBox Name="TargetPicker" ItemsSource="{Binding TargetUIs}" SelectedItem="{Binding SelectedTarget}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
-        <ContentControl Content="{Binding ElementName=TargetPicker, Path=SelectedItem.ProjectSettingsUI}" />
+        <ContentControl Content="{Binding SelectedTarget.ProjectSettingsUI}" />
     </DockPanel>
 </UserControl>

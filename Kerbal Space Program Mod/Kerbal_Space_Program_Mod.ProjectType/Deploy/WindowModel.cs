@@ -43,7 +43,8 @@ namespace KSP4VS.Deploy
             set
             {
                 selectedTarget = value;
-                threadHandling.AsyncPump.Run(() => value.DeployTarget.LoadProjectSettings());
+                threadHandling.AsyncPump.Run(() => 
+                    value.DeployTarget.LoadProjectSettings());
                 NotifyPropertyChanged();
             }
         }
@@ -56,13 +57,18 @@ namespace KSP4VS.Deploy
                 {
                     var msBuildProject = await readLock.GetProjectAsync(await project.GetSuggestedConfiguredProjectAsync());
                     var selectedTargetNameProperty = msBuildProject.GetProperty("SelectedDeployTarget");
-                    if (selectedTargetNameProperty != null)
+                    if (selectedTargetNameProperty != null && !string.IsNullOrEmpty(selectedTargetNameProperty.EvaluatedValue))
                     {
                         await threadHandling.SwitchToUIThread();
                         SelectedTarget = TargetUIs.Single(ui => ui.Name == selectedTargetNameProperty.EvaluatedValue);
                     }
                 }
             });
+            if (SelectedTarget != null)
+            {
+
+                await SelectedTarget.DeployTarget.LoadProjectSettings(); 
+            }
         }
 
         internal async Task Save()
@@ -73,9 +79,14 @@ namespace KSP4VS.Deploy
                 {
                     await writeLock.CheckoutAsync(project.FullPath);
                     var msBuildProject = await writeLock.GetProjectAsync(await project.GetSuggestedConfiguredProjectAsync());
-                    msBuildProject.SetGlobalProperty("SelectedDeployTarget", SelectedTarget.Name);
+                    msBuildProject.SetProperty("SelectedDeployTarget", SelectedTarget?.Name ?? "");
+                    msBuildProject.Save();
                 }
             });
+            if (SelectedTarget != null)
+            {
+                await SelectedTarget.DeployTarget.SaveProjectSettings(); 
+            }
         }
     }
 }

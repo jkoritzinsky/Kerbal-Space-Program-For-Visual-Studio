@@ -15,6 +15,7 @@ namespace KSP4VS.Deploy.Targets.GitHub
         public GitHubDeployUI([ImportMany] IEnumerable<IDeployTarget> deployTargets)
         {
             DeployTarget = deployTargets.Single(target => target.TargetName == Name);
+            ProjectSettingsUI = new GitHubProject { DataContext = DeployTarget };
         }
 
         public IDeployTarget DeployTarget { get; }
@@ -29,14 +30,6 @@ namespace KSP4VS.Deploy.Targets.GitHub
             }
         }
 
-        public System.Windows.Controls.Control ProjectSettingsUI
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public override string ToString() => Name;
+        public System.Windows.Controls.Control ProjectSettingsUI { get; }
     }
 }
