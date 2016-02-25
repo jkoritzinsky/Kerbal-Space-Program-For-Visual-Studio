@@ -14,12 +14,6 @@ namespace KSP4VS.Deploy.Core
     [AppliesTo("Kerbal_Space_Program_Mod")]
     internal class DeployProvider : IDeployProvider
     {
-        /// <summary>
-        /// Provides access to the project's properties.
-        /// </summary>
-        [Import]
-        private ProjectProperties Properties { get; set; }
-
         public async Task DeployAsync(CancellationToken cancellationToken, TextWriter outputPaneWriter)
         {
             // Add your custom deploy code here.  Write informational output to the outputPaneWriter.
