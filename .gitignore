@@ -210,3 +210,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+# Pegasus Generated Files
+*.peg.cs

@@ -304,6 +304,12 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
     </ProjectReference>
+    <ProjectReference Include="..\..\KSP4VS.ConfigNode.Editor\KSP4VS.ConfigNode.Editor.csproj">
+      <Project>{86E958A0-584D-427C-9598-4C5059E76C51}</Project>
+      <Name>KSP4VS.ConfigNode.Editor</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\..\KSP4VS.ConfigNode\KSP4VS.ConfigNode.csproj">
       <Project>{73ec7c98-8bbd-42b7-9de3-d1729664297b}</Project>
       <Name>KSP4VS.ConfigNode</Name>
@@ -350,22 +356,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigNode.Editor\BraceMatchingTagger.cs" />
-    <Compile Include="ConfigNode.Editor\BraceMatchingTaggerProvider.cs" />
-    <Compile Include="ConfigNode.Editor\BufferParser.cs" />
-    <Compile Include="ConfigNode.Editor\ClassificationFormats.cs" />
-    <Compile Include="ConfigNode.Editor\ClassificationTypes.cs" />
-    <Compile Include="ConfigNode.Editor\Classifier.cs" />
-    <Compile Include="ConfigNode.Editor\ClassifierProvider.cs" />
-    <Compile Include="ConfigNode.Editor\ContentType.cs" />
-    <Compile Include="ConfigNode.Editor\SemanticErrorTagger.cs" />
-    <Compile Include="ConfigNode.Editor\SemanticErrorTaggerProvider.cs" />
-    <Compile Include="ConfigNode.Editor\SnapshotSpanExtensions.cs" />
-    <Compile Include="ConfigNode.Editor\TextBuffer.cs" />
-    <Compile Include="ConfigNode.Editor\OutliningTagger.cs" />
-    <Compile Include="ConfigNode.Editor\OutliningTaggerProvider.cs" />
-    <Compile Include="ConfigNode.Editor\SyntaxErrorTagger.cs" />
-    <Compile Include="ConfigNode.Editor\SyntaxErrorTaggerProvider.cs" />
     <Compile Include="Buttons.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
