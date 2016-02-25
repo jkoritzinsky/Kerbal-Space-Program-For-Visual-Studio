@@ -28,6 +28,7 @@ namespace KSP4VS
     [Description("A project system for creating mods for Kerbal Space Program")]
     [Guid(PackageGuid)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideBindingPath]
     public sealed class VsPackage : Package
     {
         /// <summary>
