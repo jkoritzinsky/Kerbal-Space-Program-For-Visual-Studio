@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

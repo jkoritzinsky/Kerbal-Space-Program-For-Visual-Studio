@@ -1,4 +1,4 @@
-namespace KSP4VS.Deploy
+namespace KSP4VS
 {
     using System;
     

@@ -290,6 +290,18 @@
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
+    <ProjectReference Include="..\..\KSP4VS.Deploy.Core\KSP4VS.Deploy.Core.csproj">
+      <Project>{53BB3E40-85FB-4DFA-A455-D4108B2BB23F}</Project>
+      <Name>KSP4VS.Deploy.Core</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KSP4VS.Deploy.GitHub\KSP4VS.Deploy.GitHub.csproj">
+      <Project>{BDA80A95-847D-4210-B344-A3F34EBC4E60}</Project>
+      <Name>KSP4VS.Deploy.GitHub</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\Kerbal_Space_Program_Mod.ProjectTemplate\KSP4VS.ProjectTemplate.csproj">
       <Project>{ad061b25-661b-4735-aca8-99552d828642}</Project>
       <Name>KSP4VS.ProjectTemplate</Name>
@@ -304,6 +316,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="source.extension.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>source.extension.vsixmanifest</DependentUpon>
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
@@ -327,36 +346,27 @@
     <Compile Include="ConfigNode.Editor\OutliningTaggerProvider.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTagger.cs" />
     <Compile Include="ConfigNode.Editor\SyntaxErrorTaggerProvider.cs" />
-    <Compile Include="Deploy\CommandGroupHandler.cs" />
-    <Compile Include="Deploy\Control.xaml.cs">
-      <DependentUpon>Control.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Deploy\DeployProvider.cs" />
-    <Compile Include="Deploy\IDeployTarget.cs" />
-    <Compile Include="Deploy\IDeployTargetUI.cs" />
-    <Compile Include="Deploy\Targets\GitHub\GitHubDeploy.cs" />
-    <Compile Include="Deploy\Targets\GitHub\GitHubDeployUI.cs" />
-    <Compile Include="Deploy\Targets\GitHub\GitHubProject.xaml.cs">
-      <DependentUpon>GitHubProject.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Deploy\VsPackage.cs">
+    <Compile Include="Buttons.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VsPackage.vsct</DependentUpon>
+      <DependentUpon>Buttons.vsct</DependentUpon>
     </Compile>
-    <Compile Include="Deploy\WindowModel.cs" />
-    <Compile Include="Deploy\WindowPane.cs" />
-    <Compile Include="Deploy\VsUtility.cs" />
     <Compile Include="MyConfiguredProject.cs" />
     <Compile Include="MyUnconfiguredProject.cs" />
     <Compile Include="ProjectProperties.cs" />
+    <Compile Include="source.extension.cs">
+      <DependentUpon>source.extension.vsixmanifest</DependentUpon>
+    </Compile>
     <Compile Include="VsPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="source.extension.vsixmanifest" />
+    <None Include="source.extension.vsixmanifest">
+      <Generator>VsixManifestGenerator</Generator>
+      <LastGenOutput>source.extension.resx</LastGenOutput>
+    </None>
     <None Include="Key.snk" />
   </ItemGroup>
   <!-- 
@@ -440,14 +450,6 @@
     </XamlPropertyRule>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Deploy\Control.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Deploy\Targets\GitHub\GitHubProject.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <XamlPropertyRule Include="BuildSystem\Rules\ckan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,12 +472,12 @@
     <Analyzer Include="..\..\packages\Microsoft.VisualStudio.Threading.Analyzers.14.0.50702-pre\tools\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Deploy\Resources\DeployConfigurationWindowCommand.png" />
-    <VSCTCompile Include="Deploy\VsPackage.vsct">
+    <Content Include="Resources\DeployConfigurationWindowCommand.png" />
+    <VSCTCompile Include="Buttons.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
       <Generator>VsctGenerator</Generator>
-      <LastGenOutput>VsPackage.cs</LastGenOutput>
+      <LastGenOutput>Buttons.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

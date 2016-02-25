@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     // This class is adapted from the NuGet project as licensed to the
     // .NET Foundation

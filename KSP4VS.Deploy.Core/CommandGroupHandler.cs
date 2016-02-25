@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     /// <summary>
     /// Provides implementation for handling commands.
     /// </summary>
     // TODO: If your implementation is async, consider using IAsyncCommandGroupHandler instead of ICommandGroupHandler
-    [ExportCommandGroup(PackageGuids.guidVsPackageCmdSetString)]
-    [AppliesTo(MyUnconfiguredProject.UniqueCapability)]
+    [ExportCommandGroup("f61a30ca-328c-4a2c-b394-f5f4a5eefcd4")]
+    [AppliesTo("Kerbal_Space_Program_Mod")]
     internal class CommandGroupHandler : IAsyncCommandGroupHandler
     {
         private readonly IEnumerable<IDeployTargetUI> targetUIs;
@@ -62,7 +62,7 @@ namespace KSP4VS.Deploy
         /// <returns>A value that describes how this command may be handled.</returns>
         public async Task<CommandStatusResult> GetCommandStatusAsync(IImmutableSet<IProjectTree> nodes, long commandId, bool focused, string commandText, CommandStatus progressiveStatus)
         {
-            if (commandId == PackageIds.DeployConfigurationWindowCommandId)
+            if (commandId == 0x100)
             {
                 return new CommandStatusResult(true, commandText, CommandStatus.Enabled | CommandStatus.Supported);
             }

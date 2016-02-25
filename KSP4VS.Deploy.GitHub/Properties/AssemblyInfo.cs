@@ -2,22 +2,15 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\KSP4VS.dll")]
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\KSP4VS.Deploy.Core.dll")]
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\KSP4VS.Deploy.GitHub.dll")]
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\KSP4VS.ConfigNode.dll")]
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\Pegasus.Common.dll")]
-[assembly: Microsoft.VisualStudio.Shell.ProvideCodeBase(CodeBase = @"$PackageFolder$\Microsoft.Experimental.Collections.dll")]
-
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kerbal Space Program for Visual Studio")]
+[assembly: AssemblyTitle("KSP4VS.Deploy.GitHub")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("JKorTech")]
-[assembly: AssemblyProduct("Kerbal Space Program for Visual Studio")]
-[assembly: AssemblyCopyright("Copyright © JKorTech 2015")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("KSP4VS.Deploy.GitHub")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -27,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fd8dd0a5-8974-42ee-81b5-ced29ac677d1")]
+[assembly: Guid("bda80a95-847d-4210-b344-a3f34ebc4e60")]
 
 // Version information for an assembly consists of the following four values:
 //

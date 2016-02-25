@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.ProjectSystem;
 using Microsoft.VisualStudio.ProjectSystem.Build;
 using Microsoft.VisualStudio.ProjectSystem.Utilities;
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     [Export(typeof(IDeployProvider))]
-    [AppliesTo(MyUnconfiguredProject.UniqueCapability)]
+    [AppliesTo("Kerbal_Space_Program_Mod")]
     internal class DeployProvider : IDeployProvider
     {
         /// <summary>

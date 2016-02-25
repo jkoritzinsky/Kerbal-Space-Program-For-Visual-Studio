@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio;
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     public class WindowPane : Microsoft.VisualStudio.Shell.WindowPane, IVsWindowFrameNotify3
     {

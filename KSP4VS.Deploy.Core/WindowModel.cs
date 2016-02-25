@@ -7,7 +7,7 @@ using System.Linq;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace KSP4VS.Deploy
+namespace KSP4VS.Deploy.Core
 {
     internal class WindowModel : INotifyPropertyChanged
     {

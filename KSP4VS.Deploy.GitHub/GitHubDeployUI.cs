@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using KSP4VS.Deploy.Core;
 
 namespace KSP4VS.Deploy.Targets.GitHub
 {
-    [Export(typeof(IDeployTargetUI))]
     public class GitHubDeployUI : IDeployTargetUI
     {
         [ImportingConstructor]
