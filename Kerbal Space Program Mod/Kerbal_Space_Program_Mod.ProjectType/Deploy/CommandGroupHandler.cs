@@ -18,7 +18,7 @@ namespace KSP4VS.Deploy
     /// Provides implementation for handling commands.
     /// </summary>
     // TODO: If your implementation is async, consider using IAsyncCommandGroupHandler instead of ICommandGroupHandler
-    [ExportCommandGroup("f61a30ca-328c-4a2c-b394-f5f4a5eefcd4")]
+    [ExportCommandGroup(PackageGuids.guidVsPackageCmdSetString)]
     [AppliesTo(MyUnconfiguredProject.UniqueCapability)]
     internal class CommandGroupHandler : IAsyncCommandGroupHandler
     {
@@ -62,7 +62,7 @@ namespace KSP4VS.Deploy
         /// <returns>A value that describes how this command may be handled.</returns>
         public async Task<CommandStatusResult> GetCommandStatusAsync(IImmutableSet<IProjectTree> nodes, long commandId, bool focused, string commandText, CommandStatus progressiveStatus)
         {
-            if (commandId == 0x100)
+            if (commandId == PackageIds.DeployConfigurationWindowCommandId)
             {
                 return new CommandStatusResult(true, commandText, CommandStatus.Enabled | CommandStatus.Supported);
             }

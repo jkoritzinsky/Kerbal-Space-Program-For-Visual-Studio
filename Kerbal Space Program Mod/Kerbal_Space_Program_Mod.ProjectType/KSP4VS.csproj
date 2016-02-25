@@ -339,6 +339,11 @@
     <Compile Include="Deploy\Targets\GitHub\GitHubProject.xaml.cs">
       <DependentUpon>GitHubProject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Deploy\VsPackage.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VsPackage.vsct</DependentUpon>
+    </Compile>
     <Compile Include="Deploy\WindowModel.cs" />
     <Compile Include="Deploy\WindowPane.cs" />
     <Compile Include="Deploy\VsUtility.cs" />
@@ -469,6 +474,8 @@
     <VSCTCompile Include="Deploy\VsPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
+      <Generator>VsctGenerator</Generator>
+      <LastGenOutput>VsPackage.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
