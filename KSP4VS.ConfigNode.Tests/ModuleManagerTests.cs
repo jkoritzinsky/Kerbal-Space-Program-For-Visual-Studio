@@ -260,5 +260,29 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.DoesNotContain(tokens, IsError);
         }
+
+        [Fact]
+        public void IndexerOnNameWithCommaParses()
+        {
+            var tokens = ParseAndGetElements("@name[3,] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void IndexerOnNameWithoutCommaParses()
+        {
+            var tokens = ParseAndGetElements("@name[3] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
+
+        [Fact]
+        public void IndexerOnNameWithWildcardParses()
+        {
+            var tokens = ParseAndGetElements("@name[*] = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
     }
 }

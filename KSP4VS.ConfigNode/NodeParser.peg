@@ -30,7 +30,9 @@ nameSelector = "[" ((MMnamePattern ("," MMnamePattern)?) / MMnamePattern_Invalid
 MMname -lexical = topOp name
 MMselectWithOp = MMname ordering? nameSelector?
 MMselectWithoutOp = name ordering? nameSelector
-ordering = "," "-"? [0-9]+
+ordering = "," (("-"? [0-9]+) / "*")
+variableIndexing = "[" [0-9]+ ("," .)? "]"
+nameIndexing = "[*]" / "[" [0-9]+ ","? "]" / variableIndexing
 
 hasOp = [@!#~]
 hasBody = (hasOp MMselectWithoutOp hasExpression*) / MMnamePattern_InvalidChar
@@ -51,14 +53,14 @@ valueName -lexical = ((name needsExpression*) / name_InvalidChar) name_InvalidCh
 nodeName -lexical = (MMnodeSelector / (name needsExpression*) / name_InvalidChar) name_InvalidChar? 
 
 value =  bool / numberList / string
-variable -lexical = "#$" ("/"? (("@" name ordering? nameSelector?) / "..") ("/"(("@" name ordering? nameSelector?) / ".."))* "/")? name ordering? ("[" [0-9]+ ("," .)? "]")? "$" 
+variable -lexical = "#$" ("/"? (("@" name ordering? nameSelector?) / "..") ("/"(("@" name ordering? nameSelector?) / ".."))* "/")? name ordering? variableIndexing? "$" 
 variableList -lexical = variable (_ variable)* &newlineOrComment
 
 MMvalue = variableList / bool / numberList / string
 
 mathOp = [+*%^/-]
 
-MMvalueName = !name ((MMselectWithOp needsExpression*) / name_InvalidChar) name_InvalidChar?
+MMvalueName = !name ((MMname ordering? nameIndexing? nameSelector? needsExpression*) / name_InvalidChar) name_InvalidChar?
 
 MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ MMvalue
 
