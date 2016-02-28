@@ -13,9 +13,7 @@ namespace KSP4VS.Deploy.Core
         string TargetName { get; }
 
         Task LoadProjectSettings();
-        Task LoadUserSettings();
         Task SaveProjectSettings();
-        Task SaveUserSettings();
 
         Task<bool> DeployProject();
     }

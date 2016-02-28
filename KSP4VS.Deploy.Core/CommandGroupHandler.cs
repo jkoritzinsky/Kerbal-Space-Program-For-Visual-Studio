@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using Task = System.Threading.Tasks.Task;
 
 namespace KSP4VS.Deploy.Core
 {
@@ -60,15 +61,15 @@ namespace KSP4VS.Deploy.Core
         /// <param name="commandText">The default caption of the command that is displayed to the user.  <c>null</c> to allow the default caption to be used.</param>
         /// <param name="progressiveStatus">The query result thus far (as default, or as handed off from previous handler).</param>
         /// <returns>A value that describes how this command may be handled.</returns>
-        public async Task<CommandStatusResult> GetCommandStatusAsync(IImmutableSet<IProjectTree> nodes, long commandId, bool focused, string commandText, CommandStatus progressiveStatus)
+        public Task<CommandStatusResult> GetCommandStatusAsync(IImmutableSet<IProjectTree> nodes, long commandId, bool focused, string commandText, CommandStatus progressiveStatus)
         {
             if (commandId == 0x100)
             {
-                return new CommandStatusResult(true, commandText, CommandStatus.Enabled | CommandStatus.Supported);
+                return Task.FromResult(new CommandStatusResult(true, commandText, CommandStatus.Enabled | CommandStatus.Supported));
             }
             else
             {
-                return CommandStatusResult.Unhandled;
+                return Task.FromResult(CommandStatusResult.Unhandled);
             }
         }
 
