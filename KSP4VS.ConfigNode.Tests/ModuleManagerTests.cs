@@ -284,5 +284,13 @@ namespace KSP4VS.ConfigNode.Tests
             Assert.NotEqual(1, tokens.Count);
             Assert.DoesNotContain(tokens, IsError);
         }
+
+        [Fact]
+        public void OtherNodeReferenceParses()
+        {
+            var tokens = ParseAndGetElements("*@TEST[test]/path = value \n");
+            Assert.NotEqual(1, tokens.Count);
+            Assert.DoesNotContain(tokens, IsError);
+        }
     }
 }

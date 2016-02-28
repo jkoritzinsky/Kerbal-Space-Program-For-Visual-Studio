@@ -53,14 +53,17 @@ valueName -lexical = ((name needsExpression*) / name_InvalidChar) name_InvalidCh
 nodeName -lexical = (MMnodeSelector / (name needsExpression*) / name_InvalidChar) name_InvalidChar? 
 
 value =  bool / numberList / string
-variable -lexical = "#$" ("/"? (("@" name ordering? nameSelector?) / "..") ("/"(("@" name ordering? nameSelector?) / ".."))* "/")? name ordering? variableIndexing? "$" 
+variableSearch = ("/"? (("@" name ordering? nameSelector?) / "..") ("/"(("@" name ordering? nameSelector?) / ".."))* "/")? name ordering? variableIndexing?
+variable -lexical = "#"("$" variableSearch "$")+
 variableList -lexical = variable (_ variable)* &newlineOrComment
 
 MMvalue = variableList / bool / numberList / string
 
 mathOp = [+*%^/-]
 
-MMvalueName = !name ((MMname ordering? nameIndexing? nameSelector? needsExpression*) / name_InvalidChar) name_InvalidChar?
+
+MMvalueNameSearch = "*" variableSearch
+MMvalueName = !name ((MMname ordering? nameIndexing? nameSelector? needsExpression*)/ MMvalueNameSearch / name_InvalidChar) name_InvalidChar?
 
 MMnameValuePair -lexical = MMvalueName _ mathOp? eq _ MMvalue
 
