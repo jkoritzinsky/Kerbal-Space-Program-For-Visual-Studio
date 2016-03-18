@@ -61,9 +61,15 @@ namespace KSP4VS.ConfigNode.Tests
 
 
         [Fact]
-        public void NameWithNumberHasErrorToken()
+        public void NameWithNumberIsValid()
         {
-            Assert.Contains(ParseAndGetElements("name2 = value\r\n"), (element) => element.Name == "name_InvalidChar");
+            Assert.DoesNotContain(ParseAndGetElements("name2 = value\r\n"), IsError);
+        }
+
+        [Fact]
+        public void NameWithInvalidSymbolInMiddleIsError()
+        {
+            Assert.Contains(ParseAndGetElements("name*name = value\r\n"), IsError);
         }
 
         [Fact]

@@ -20,7 +20,7 @@ numberListSpace -lexical ="" (number !( _ "," _)) ("" whitespace !(",") _ number
 numberList -lexical ="" (numberListSpace / numberListComma) &newlineOrComment
 
 
-name -lexical =  "" [A-Za-z_]+ 
+name -lexical =  "" [A-Za-z_0-9.]+ 
 name_InvalidChar -lexical = "" ([^/{} \t\r\n=])+
 
 topOp = "" [@+$%!-]
