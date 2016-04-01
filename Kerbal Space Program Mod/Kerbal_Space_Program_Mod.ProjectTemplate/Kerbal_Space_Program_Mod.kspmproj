@@ -3,6 +3,7 @@
   <PropertyGroup Label="Globals">
       <CustomProjectExtensionsPath Condition="'$(CustomProjectExtensionsPath)' == ''">$(LocalAppData)\CustomProjectSystems\Kerbal_Space_Program_Mod\</CustomProjectExtensionsPath>
       <KSPRoot>C:\Program Files (x86)\Steam\SteamApps\common\Kerbal Space Program</KSPRoot>
+      <KSP_Data>KSP_Data</KSP_Data>
   </PropertyGroup>
     <ItemGroup>
         <ProjectCapability Include="DeclaredSourceItems" />
@@ -13,6 +14,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" Label="Configuration">
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Label="Configuration">
+  </PropertyGroup>
+    
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+      <KSP_Data>KSP_Data</KSP_Data>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+      <KSP_Data>KSP_x64_Data</KSP_Data>
   </PropertyGroup>
 
   <Import Project="$(CustomProjectExtensionsPath)CustomProject.props" />
@@ -33,11 +41,23 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-        <HintPath>$(KSPRoot)\KSP_Data\Managed\UnityEngine.dll</HintPath>
+        <HintPath>$(KSPRoot)\$(KSP_Data)\Managed\UnityEngine.dll</HintPath>
         <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-        <HintPath>$(KSPRoot)\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <HintPath>$(KSPRoot)\$(KSP_Data)\Managed\Assembly-CSharp.dll</HintPath>
+        <Private>false</Private>
+    </Reference>
+    <Reference Include="KSPAssets">
+        <HintPath>$(KSPRoot)\$(KSP_Data)\Managed\KSPAssets.dll</HintPath>
+        <Private>false</Private>
+    </Reference>
+    <Reference Include="KSPCore">
+        <HintPath>$(KSPRoot)\$(KSP_Data)\Managed\KSPCore.dll</HintPath>
+        <Private>false</Private>
+    </Reference>
+    <Reference Include="KSPUtils">
+        <HintPath>$(KSPRoot)\$(KSP_Data)\Managed\KSPUtils.dll</HintPath>
         <Private>false</Private>
     </Reference>
   </ItemGroup>
